@@ -21,16 +21,37 @@ body {
     height: 15vh;
     position: absolute;
     top: 2vh;
-    background-color: red;
+    background-color: white;
     z-index: 10;
     container-type: inline-size;
 }
 
 #calendarScreen {
-    background-image: url("../assets/WhiteWallTexture.jpg");
+    background-image: linear-gradient(rgba(221, 155, 133, 0.55), rgba(221, 155, 133, 0.55)), url("../assets/WhiteWallTexture.jpg");
     background-size: cover;
     width: 100%;
     height: 100%;
+}
+
+#calendar {
+    /* Get calendar as background picture of div */
+    background-image: url("../assets/clearCalendar.png");
+    left: 0;
+    right: 0;
+    top:0;
+    bottom:0;
+    margin: auto;
+    width: 90vmin;
+    height: 90vmin;
+    position: absolute;
+    background-size: cover;
+
+    /* Make grid that is just over each square in the calendar */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    padding-top: 22%;
+    padding-bottom: 5%;
 }
 
 #banner h1{
