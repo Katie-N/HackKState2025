@@ -2,6 +2,11 @@
 *, *::before, *::after {
   box-sizing: border-box;
 }
+:root {
+    --calendarDisplay: block;
+    --diaryEntryDisplay: none;
+    --backgroundBodyImage: url("../assets/BrownPaperBackground.jpg");
+}
 * {
   margin: 0;
 }
@@ -49,11 +54,11 @@ body {
 }
 
 #calendarScreen {
-    background-image: linear-gradient(rgba(221, 155, 133, 0.55), rgba(221, 155, 133, 0.55)), url("../assets/WhiteWallTexture.jpg");
+    /* background-image: linear-gradient(rgba(221, 155, 133, 0.55), rgba(221, 155, 133, 0.55)), url("../assets/WhiteWallTexture.jpg"); */
     background-size: cover;
     width: 100%;
     height: 100%;
-    display: None;
+    display: var(--calendarDisplay);
 }
 
 #calendar {
@@ -64,9 +69,10 @@ body {
     top:0;
     bottom:0;
     margin: auto;
+    margin-top: 5vmin; /* move the calendar down so it has the same amount of margin on top as it does on its sides */
     width: 90vmin;
     height: 90vmin;
-    position: absolute;
+    /* position: absolute; */
     background-size: cover;
 
     /* Make grid that is just over each square in the calendar */
@@ -77,25 +83,14 @@ body {
     padding-bottom: 5%;
 }
 
-/* Mobile Devices
-#calendarScreen h1{
-    font-size: 8cqw;
-}
-
-/* Tabets and larger 
-@media screen and (min-width: 425px) {
-    #calendarScreen h1{
-        font-size: 4cqw;
-    }
-} */
-
 .backgroundOfBody {
-    background-image: url("../assets/BrownPaperBackgroundTextSpace.jpg");
+    background-image: var(--backgroundBodyImage);
     background-size: cover;
 }
 #diaryEntryScreen {
     width: 100%;
     height: 100%;
+    display: var(--diaryEntryDisplay);
 }
 #diaryEntryWidgets {
     display: flex;
