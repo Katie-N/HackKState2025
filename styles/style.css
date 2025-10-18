@@ -34,6 +34,7 @@ body {
 }
 
 #calendar {
+    /* Get calendar as background picture of div */
     background-image: url("../assets/clearCalendar.png");
     left: 0;
     right: 0;
@@ -44,6 +45,13 @@ body {
     height: 90vmin;
     position: absolute;
     background-size: cover;
+
+    /* Make grid that is just over each square in the calendar */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    padding-top: 22%;
+    padding-bottom: 5%;
 }
 
 #banner h1{
