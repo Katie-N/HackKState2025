@@ -8,7 +8,11 @@
     --backgroundBodyImage: url("../assets/BrownPaperBackground.jpg");
 }
 * {
-  margin: 0;
+    margin: 0;
+    padding: 0;
+}
+ul {
+    list-style-type: none;
 }
 body {
     width: 100%;
@@ -95,4 +99,36 @@ body {
 #diaryEntryWidgets {
     display: flex;
     flex-direction: column;
+}
+
+#widgetSelection {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    padding: 2vmin;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    width:100%;
+}
+
+#widgetSelection img {
+    width: 10vmin;
+    height: 10vmin;
+}
+
+#widgetSelection li {
+    list-style-type: none;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    font-family: "Montserrat";
+}
+
+.emptyWidget {
+    border: 2px dashed black;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 90vmin;
+    height: 90vmin;
+    margin: auto;
 }
