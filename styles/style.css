@@ -28,6 +28,7 @@ body {
 .banner {
     width: 100%;
     margin-top: 2vh;
+    margin-bottom: 2vh;
     background-color: white;
     z-index: 10;
     container-type: inline-size;
@@ -93,13 +94,17 @@ body {
 }
 #diaryEntryScreen {
     width: 100%;
-    height: 100%;
+    padding-bottom: calc(14vmin + 4vh); /* To prevent content from being hidden behind the fixed widget selection bar */
     display: var(--diaryEntryDisplay);
 }
+
 #diaryEntryWidgets {
     display: flex;
     flex-direction: column;
     width: 100%;
+    /* Add padding at the bottom to prevent overlap with fixed widget selection bar */
+    padding-bottom: calc(14vmin + 4vh); /* 10vmin for icons + 2vmin padding on each side + extra space */
+    min-height: 100vh; /* Ensure the container takes full viewport height */
 }
 
 #widgetSelection {
@@ -110,7 +115,9 @@ body {
     background-color: white;
     position: fixed;
     bottom: 0;
-    width:100%;
+    width: 100%;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow for visual separation */
+    z-index: 1000; /* Ensure it stays on top */
 }
 
 #widgetSelection img {
@@ -129,7 +136,82 @@ body {
 .emptyWidget {
     border: 2px dashed black;
     background-color: rgba(255, 255, 255, 0.5);
-    width: 90vmin;
-    height: 90vmin;
+    /* width: 90vmin;
+    height: 90vmin; */
+    /* margin: auto; */
+}
+
+/* Base widget styles */
+.widget-base {
+    width: 80vmin;
+    height: 80vmin;
     margin: auto;
+    margin-bottom: 5vmin;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-family: "Montserrat";
+}
+
+/* Note widget styles */
+.note-widget {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border: none;
+    resize: none;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-family: "Montserrat";
+}
+
+/* Image widget styles */
+.image-widget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-widget img {
+    max-width: 100%;
+    max-height: 80%;
+}
+
+.image-widget input[type="file"] {
+    display: none;
+}
+
+.image-widget button {
+    padding: 10px 20px;
+    font-family: "Montserrat";
+    margin-top: 10px;
+    border: none;
+    background-color: #ddd;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.image-widget button:hover {
+    background-color: #ccc;
+}
+
+/* Song widget styles */
+.song-widget {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.song-widget input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-family: "Montserrat";
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.song-widget .song-preview {
+    width: 80%;
+    margin-top: 20px;
 }

@@ -1,5 +1,85 @@
 console.log("Hello world")
 
+// Functions to transform widgets into their editable versions
+function transformToNoteWidget(element) {
+    // Create a textarea for notes
+    const textarea = document.createElement('textarea');
+    textarea.className = 'note-widget';
+    textarea.placeholder = 'Write your note here...';
+    
+    // Replace the content of the element with the textarea
+    element.innerHTML = '';
+    element.appendChild(textarea);
+    element.className = 'widget-base';
+}
+
+function transformToImageWidget(element) {
+    // Create an image input container
+    const container = document.createElement('div');
+    container.className = 'image-widget widget-base';
+
+    // Create the image preview
+    const img = document.createElement('img');
+    img.style.display = 'none'; // Initially hidden
+
+    // Create the file input
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+
+    // Create a button to trigger file selection
+    const button = document.createElement('button');
+    button.textContent = 'Select Image';
+
+    // Add event listeners
+    input.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                img.src = e.target.result;
+                img.style.display = 'block';
+                button.textContent = 'Change Image';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    button.addEventListener('click', () => input.click());
+
+    // Assemble the widget
+    container.appendChild(img);
+    container.appendChild(input);
+    container.appendChild(button);
+
+    // Replace the content of the element
+    element.innerHTML = '';
+    element.appendChild(container);
+}
+
+function transformToSongWidget(element) {
+    // Create a song input container
+    const container = document.createElement('div');
+    container.className = 'song-widget widget-base';
+
+    // Create the input for song URL/link
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = 'Paste your song link here...';
+
+    // Create preview area (could be expanded to show embedded players for supported platforms)
+    const preview = document.createElement('div');
+    preview.className = 'song-preview';
+
+    // Assemble the widget
+    container.appendChild(input);
+    container.appendChild(preview);
+
+    // Replace the content of the element
+    element.innerHTML = '';
+    element.appendChild(container);
+}
+
 // This makes the list of available widgets selectable
 Sortable.create(document.getElementById("widgetSelection"), { 
     group: {name: "sharedWidgets", pull: 'clone', put: false},
@@ -8,7 +88,7 @@ Sortable.create(document.getElementById("widgetSelection"), {
  });
 
 widgetsForDays = document.getElementById("widgetsForDay")
- Sortable.create(widgetsForDays, { 
+Sortable.create(widgetsForDays, { 
     group: {name: "sharedWidgets", put: true},
     animation: 150, 
     sort: true,
@@ -23,9 +103,21 @@ widgetsForDays = document.getElementById("widgetsForDay")
     },
     onAdd: (event) => {
         // If the new element was added below the empty widget, move it above instead
-        if (widgetsForDays.lastChild.classList.contains("emptyWidget") === false) {
-            el = widgetsForDays.querySelector(".emptyWidget") 
-            widgetsForDays.appendChild(el);
+        el = widgetsForDays.querySelector(".emptyWidget") 
+        widgetsForDays.appendChild(el);
+
+        // Transform the widget based on its type
+        const newElement = event.item;
+        const imgElement = newElement.querySelector('img');
+        if (imgElement) {
+            const imgSrc = imgElement.src;
+            if (imgSrc.includes('/notepadIcon.png')) {
+                transformToNoteWidget(newElement);
+            } else if (imgSrc.includes('/cameraIcon.png')) {
+                transformToImageWidget(newElement);
+            } else if (imgSrc.includes('/music-playerIcon.png')) {
+                transformToSongWidget(newElement);
+            }
         }
     }
  });
