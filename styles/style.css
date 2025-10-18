@@ -24,6 +24,30 @@ body {
     container-type: inline-size;
 }
 
+#banner h1{
+    font-family: "nickainley";
+    text-align: center;
+    padding-top: 10px;
+    font-size: 2rem;
+}
+
+#banner h2{
+    font-family: "Montserrat";
+    font-weight: bold;
+    text-align: center;
+    font-size: 1rem;
+    padding-bottom: 10px;
+}
+/* Styles for screens wider than 768px */
+@media screen and (min-width: 768px) {
+    #banner h1{
+        font-size: 3rem;
+    }
+    #banner h2{
+        font-size: 1.5rem;
+    }
+}
+
 #calendarScreen {
     background-image: linear-gradient(rgba(221, 155, 133, 0.55), rgba(221, 155, 133, 0.55)), url("../assets/WhiteWallTexture.jpg");
     background-size: cover;
@@ -51,20 +75,6 @@ body {
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     padding-top: 22%;
     padding-bottom: 5%;
-}
-
-#banner h1{
-    font-family: "nickainley";
-    text-align: center;
-    padding-top: 25px;
-    font-size: 7rem;
-}
-
-#banner h2{
-    font-family: "Montserrat";
-    font-weight: bold;
-    text-align: center;
-    font-size: 3rem;
 }
 
 /* Mobile Devices
