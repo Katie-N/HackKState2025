@@ -9,14 +9,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body class="backgroundOfBody">
-    <button id="goToCalendar">calendar view</button>
-    <button id="goToDiary">diary entry</button>
+    <button id="goToCalendar" onclick="goToCalendar()"><img src="./assets/icons/calendar.png"></button>
+    <!-- <button id="goToDiary">diary entry</button> -->
     <div class="banner" id="banner">
         <h1>How Many Stars?</h1>
         <h2>10/17/2025</h2>
     </div>
     <div id="calendarScreen">
-        <div id="calendar"></div>
+        <div id="calendar" onclick="goToDiary()"></div>
     </div>
     <div id="diaryEntryScreen">
         <div id="widgetDisplayArea">
@@ -95,12 +95,9 @@
             let widgetsForDays = document.getElementById("widgetsForDay")
             let el = widgetsForDays.querySelector(".emptyWidget") 
             widgetsForDays.appendChild(el);
-            // document.getElementById()
-            // console.log("Document data:", docSnap.data());
         } else {
-        // docSnap.data() will be undefined in this case
         console.log("No such document!");
-        // No data yet so default go to creation mode. 
+        // No data for this so default go to creation mode. 
         }
 
         // TODO: push diary entry to firestore for specific day

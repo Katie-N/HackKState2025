@@ -147,5 +147,5 @@ function transformWidgetToElement(key, widgetData) {
 // goToCalendar();
 // Right now I'm working on the diary entry page so I will skip the hassle of clicking the button and just go to it first thing
 goToDiary();
-document.getElementById("goToCalendar").addEventListener("click", goToCalendar);
-document.getElementById("goToDiary").addEventListener("click", goToDiary);
+// document.getElementById("goToCalendar").addEventListener("click", goToCalendar);
+// document.getElementById("goToDiary").addEventListener("click", goToDiary);

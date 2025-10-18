@@ -25,6 +25,7 @@ body {
   font-style: normal; 
 }
 
+/* Banner Styles */
 .banner {
     width: 100%;
     margin-top: 2vh;
@@ -58,6 +59,7 @@ body {
     }
 }
 
+/* Calendar Screen Styles */
 #calendarScreen {
     /* background-image: linear-gradient(rgba(221, 155, 133, 0.55), rgba(221, 155, 133, 0.55)), url("../assets/WhiteWallTexture.jpg"); */
     background-size: cover;
@@ -92,6 +94,8 @@ body {
     background-image: var(--backgroundBodyImage);
     background-size: cover;
 }
+
+/* Diary Entry Screen Styles */
 #diaryEntryScreen {
     width: 100%;
     padding-bottom: calc(14vmin + 4vh); /* To prevent content from being hidden behind the fixed widget selection bar */
@@ -214,4 +218,14 @@ body {
 .song-widget .song-preview {
     width: 80%;
     margin-top: 20px;
+}
+
+#goToCalendar {
+    background-color: transparent;
+    border: none;
+    width: 10vmin;
+}
+#goToCalendar img {
+    width: 100%;
+    height: auto;
 }
