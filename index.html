@@ -65,15 +65,46 @@
 
         const db = getFirestore(app);
         console.log(db)
-        const docRef = doc(db, "diaryEntries", "10-18-2025");
-        const docSnap = await getDoc(docRef);
 
+        // Pull diary entry from firestore for specific day
+        // Do this once when the diary entry is clicked on. 
+        let docRef = doc(db, "diaryEntries", "10-18-2025");
+        let docSnap = await getDoc(docRef);
+
+        // If the diary entry for this day already exists, populate
         if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
+            // Get the references to widgets for thos entry
+            let references = docSnap.data()
+            // Loop through each referenced object and create an HTML element for it
+            for (let key in references) {
+                let collection = references[key].parent.id
+                docRef = doc(db, collection, references[key].id);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    references[key] = docSnap.data()
+                } else {
+                    console.log("No such document for widget reference:", references[key]);
+                    continue
+                }
+                console.log(references[key])
+                let widgetElement = transformWidgetToElement(key, references[key])
+                document.getElementById("widgetsForDay").appendChild(widgetElement)
+                
+            }
+            // Always move the empty widget to the end.
+            let widgetsForDays = document.getElementById("widgetsForDay")
+            let el = widgetsForDays.querySelector(".emptyWidget") 
+            widgetsForDays.appendChild(el);
+            // document.getElementById()
+            // console.log("Document data:", docSnap.data());
         } else {
         // docSnap.data() will be undefined in this case
         console.log("No such document!");
+        // No data yet so default go to creation mode. 
         }
+
+        // TODO: push diary entry to firestore for specific day
+        
     </script>
 </body>
 </HTML>
