@@ -88,7 +88,7 @@ Sortable.create(document.getElementById("widgetSelection"), {
  });
 
 widgetsForDays = document.getElementById("widgetsForDay")
- Sortable.create(widgetsForDays, { 
+Sortable.create(widgetsForDays, { 
     group: {name: "sharedWidgets", put: true},
     animation: 150, 
     sort: true,
@@ -103,21 +103,20 @@ widgetsForDays = document.getElementById("widgetsForDay")
     },
     onAdd: (event) => {
         // If the new element was added below the empty widget, move it above instead
-        if (widgetsForDays.lastChild.classList.contains("emptyWidget") === false) {
-            el = widgetsForDays.querySelector(".emptyWidget") 
-            widgetsForDays.appendChild(el);
-        }
+        el = widgetsForDays.querySelector(".emptyWidget") 
+        widgetsForDays.appendChild(el);
 
         // Transform the widget based on its type
         const newElement = event.item;
+        console.log(newElement)
         const imgElement = newElement.querySelector('img');
         if (imgElement) {
             const imgSrc = imgElement.src;
-            if (imgSrc.includes('notepad.png')) {
+            if (imgSrc.includes('/notepadIcon.png')) {
                 transformToNoteWidget(newElement);
-            } else if (imgSrc.includes('camera.png')) {
+            } else if (imgSrc.includes('/cameraIcon.png')) {
                 transformToImageWidget(newElement);
-            } else if (imgSrc.includes('music-player.png')) {
+            } else if (imgSrc.includes('/music-playerIcon.png')) {
                 transformToSongWidget(newElement);
             }
         }
