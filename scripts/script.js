@@ -27,16 +27,30 @@ function createWidgetElement(type, data = {}) {
         input.accept = 'image/*';
         const button = document.createElement('button');
         button.textContent = data.src ? 'Change Image' : 'Select Image';
-        input.addEventListener('change', (e) => {
+        input.addEventListener('change', async (e) => {
             const file = e.target.files[0];
             if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    img.src = e.target.result;
+                try {
+                    button.textContent = 'Uploading...';
+                    button.disabled = true;
+                    
+                    // Upload the image using the global function we defined
+                    const downloadURL = await window.uploadImageToFirebase(file);
+                    
+                    // Update the image source with the Firebase URL
+                    img.src = downloadURL;
                     img.style.display = 'block';
                     button.textContent = 'Change Image';
-                };
-                reader.readAsDataURL(file);
+                    button.disabled = false;
+                    
+                    // Store the Firebase URL in the widget's data
+                    container.dataset.firebaseUrl = downloadURL;
+                } catch (error) {
+                    console.error('Error uploading image:', error);
+                    alert('Failed to upload image. Please try again.');
+                    button.textContent = 'Select Image';
+                    button.disabled = false;
+                }
             }
         });
         button.addEventListener('click', () => input.click());
