@@ -28,6 +28,7 @@ body {
 .banner {
     width: 100%;
     margin-top: 2vh;
+    margin-bottom: 2vh;
     background-color: white;
     z-index: 10;
     container-type: inline-size;
@@ -96,6 +97,7 @@ body {
     padding-bottom: calc(14vmin + 4vh); /* To prevent content from being hidden behind the fixed widget selection bar */
     display: var(--diaryEntryDisplay);
 }
+
 #diaryEntryWidgets {
     display: flex;
     flex-direction: column;
@@ -134,16 +136,17 @@ body {
 .emptyWidget {
     border: 2px dashed black;
     background-color: rgba(255, 255, 255, 0.5);
-    width: 90vmin;
-    height: 90vmin;
-    margin: auto;
+    /* width: 90vmin;
+    height: 90vmin; */
+    /* margin: auto; */
 }
 
 /* Base widget styles */
 .widget-base {
-    width: 90vmin;
-    height: 90vmin;
+    width: 80vmin;
+    height: 80vmin;
     margin: auto;
+    margin-bottom: 5vmin;
     background-color: rgba(255, 255, 255, 0.8);
     font-family: "Montserrat";
 }

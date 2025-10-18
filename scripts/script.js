@@ -108,7 +108,6 @@ Sortable.create(widgetsForDays, {
 
         // Transform the widget based on its type
         const newElement = event.item;
-        console.log(newElement)
         const imgElement = newElement.querySelector('img');
         if (imgElement) {
             const imgSrc = imgElement.src;
