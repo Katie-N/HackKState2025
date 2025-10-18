@@ -18,9 +18,7 @@ body {
 
 .banner {
     width: 100%;
-    height: 15vh;
-    position: absolute;
-    top: 2vh;
+    margin-top: 2vh;
     background-color: white;
     z-index: 10;
     container-type: inline-size;
@@ -31,6 +29,7 @@ body {
     background-size: cover;
     width: 100%;
     height: 100%;
+    display: None;
 }
 
 #calendar {
@@ -80,9 +79,15 @@ body {
     }
 } */
 
-#diaryEntryScreen {
+.backgroundOfBody {
     background-image: url("../assets/BrownPaperBackgroundTextSpace.jpg");
+    background-size: cover;
+}
+#diaryEntryScreen {
     width: 100%;
     height: 100%;
-    display: none;
+}
+#diaryEntryWidgets {
+    display: flex;
+    flex-direction: column;
 }

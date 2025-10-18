@@ -7,17 +7,25 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="backgroundOfBody">
+    <div class="banner" id="banner">
+        <h1>How Many Stars?</h1>
+        <h2>10/17/2025</h2>
+    </div>
     <div id="calendarScreen">
-        <div class="banner" id="banner">
-            <h1>How Many Stars?</h1>
-            <h2>10/17/2025</h2>
-        </div>
         <div id="calendar"></div>
     </div>
     <div id="diaryEntryScreen">
-        <div></div>
+        <div id="widgetDisplayArea"></div>
+        <ul id="widgetSelection">
+            <li>Image</li>
+            <li>Note</li>
+            <li>Weather</li>
+            <li>Song</li>
+        </ul>
     </div>
+   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
    <script src="./scripts/script.js"></script>
    <!-- <script src="./scripts/fittext.js"></script>
    <script>
