@@ -1,0 +1,35 @@
+
+{
+    "name": "daily note dataset",
+    "version": "1.0.0",
+    "description": "A dataset containing daily notes for testing purposes.",
+    "data": [
+        { 
+            "food" : [
+            { "foodType": "Food type1" , "rating": "5" , "comment" :  "comment1" 
+                 }  
+            ],
+            "mood":  [
+            { 
+                "moodType": "mood type1" , "rating": "5" , "comment" :  "comment1" 
+                }  
+            ],
+            "weather":  [
+            { 
+                "weatherType": "weather type1" , "rating": "5" , "comment" :  "comment1" 
+                 }  
+            ],
+             "photo" : [
+                { "image": "image1.jpeg",  "rating": "5" , "comment" :  "comment1"
+                }   
+                ], 
+            "music" : [    
+                { 
+                "musicType" : "song" , "rating" : "5" , "comment" :  "comment1" 
+                 }  
+            ]
+         }
+        
+    ]
+    
+}
