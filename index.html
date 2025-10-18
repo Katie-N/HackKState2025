@@ -39,28 +39,41 @@
    <script>
     window.fitText( document.getElementById("bannerh1"), 1.5 );
     </script> -->
+    <!-- <script type="module" src="./scripts/firebaseApp.js"></script> -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
+        import { getFirestore, doc, setDoc, collection, addDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+        apiKey: "AIzaSyDy_MUOgD-8EpwDC3dwz4X0AxiOzc99O9I",
+        authDomain: "hack-kstate-2025-database.firebaseapp.com",
+        projectId: "hack-kstate-2025-database",
+        storageBucket: "hack-kstate-2025-database.firebasestorage.app",
+        messagingSenderId: "309828879233",
+        appId: "1:309828879233:web:a65e6c86cabd474a455e80",
+        measurementId: "G-RZCN86FE9C"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        const db = getFirestore(app);
+        console.log(db)
+        const docRef = doc(db, "diaryEntries", "10-18-2025");
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+        } else {
+        // docSnap.data() will be undefined in this case
+        console.log("No such document!");
+        }
+    </script>
 </body>
 </HTML>
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDy_MUOgD-8EpwDC3dwz4X0AxiOzc99O9I",
-    authDomain: "hack-kstate-2025-database.firebaseapp.com",
-    projectId: "hack-kstate-2025-database",
-    storageBucket: "hack-kstate-2025-database.firebasestorage.app",
-    messagingSenderId: "309828879233",
-    appId: "1:309828879233:web:a65e6c86cabd474a455e80",
-    measurementId: "G-RZCN86FE9C"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
