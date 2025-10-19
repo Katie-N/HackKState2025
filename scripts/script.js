@@ -3,7 +3,6 @@ console.log("Hello world")
 // Functions to transform widgets into their editable versions
 // Unified widget creation and transformation
 function createWidgetElement(type, data = {}) {
-    console.log(data)
     const element = document.createElement('li');
     element.className = 'widget-base widget-container';
     if (type === 'note') {
@@ -84,6 +83,7 @@ function createWidgetElement(type, data = {}) {
     }
     starContainer = document.createElement('div')
     starContainer.className = 'starContainer';
+    starContainer.dataset.currentRating = data.rating
     for (let i = 1; i < 6; i++) {
         
         // Make the star clickable
@@ -120,11 +120,15 @@ function rateWidget() {
         numStars = 5
     }
 
+    // Note that camel case is turned into all lowercase separated by dashes in html.
+    // So currentRating becomes data-current-rating
+    this.parentNode.dataset.currentRating = numStars
+
     for (i in this.parentNode.children) {
         if (i < numStars) {
             this.parentNode.children[i].classList.remove('emptyStar');
             this.parentNode.children[i].classList.add('filledStar');
-        } else {
+        } else if (i < 5){
             this.parentNode.children[i].classList.remove('filledStar');
             this.parentNode.children[i].classList.add('emptyStar');
         }
