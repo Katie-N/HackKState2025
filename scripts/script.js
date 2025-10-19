@@ -83,6 +83,7 @@ function createWidgetElement(type, data = {}) {
     }
     starContainer = document.createElement('div')
     starContainer.className = 'starContainer';
+    starContainer.dataset.currentRating = data.rating
     for (let i = 1; i < 6; i++) {
         
         // Make the star clickable
@@ -118,6 +119,10 @@ function rateWidget() {
     } else if (this.classList.contains('star5')) {
         numStars = 5
     }
+
+    // Note that camel case is turned into all lowercase separated by dashes in html.
+    // So currentRating becomes data-current-rating
+    this.parentNode.dataset.currentRating = numStars
 
     for (i in this.parentNode.children) {
         if (i < numStars) {

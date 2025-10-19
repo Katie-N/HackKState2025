@@ -118,7 +118,7 @@
                     console.log("No such document for widget reference:", references[key]);
                     continue
                 }
-                console.log(references[key])
+
                 let widgetElement = transformWidgetToElement(key, references[key])
                 document.getElementById("widgetsForDay").appendChild(widgetElement)
                 
@@ -133,30 +133,37 @@
         }
 
         function extractWidgetData(widgetElement) {
+            console.log(widgetElement)
             let widgetData = {}
-            widgetData.rating = widgetElement.querySelector(".starRating").getAttribute("data-rating")
-            if (widgetElement.classList.contains("image-widget")) {
+            
+            let intRating = parseInt(widgetElement.querySelector(".starContainer").dataset.currentRating)
+            widgetData.rating = intRating != NaN ? intRating  : 0 // Default to 0 stars if something goes wrong. 
+            
+            // Code for extracting /pictures collection fields
+            if (widgetElement.querySelector(".image-widget")) {
                 widgetData.widgetType = "picture"
-                widgetData.imageURL = widgetElement.querySelector("img").src
+                widgetData.src = widgetElement.querySelector("img").src
                 widgetData.photoFrame = "plain" // TODO: get photo frame type
-            } else if (widgetElement.classList.contains("note-widget")) {
+
+            // Code for extracting /notes collection fields
+            } else if (widgetElement.querySelector(".note-widget")) {
                 widgetData.widgetType = "note"
-                widgetData.text = widgetElement.querySelector("textarea").value
-                widgetData.noteType = widgetElement.querySelector()
+                widgetData.value = widgetElement.querySelector("textarea").value
                 // Widget Type depends on what class is applied to the note widget. 
-                if (widgetElement.classList.contains("notebookPaper")) {
+                if (widgetElement.querySelector(".notebookPaper")) {
                     widgetData.noteType = "notebookPaper";
-                } else if (widgetElement.classList.contains("post-it")) {
-                    widgetData.noteType = "stickyNote"
+                } else if (widgetElement.querySelector(".post-it")) {
+                    widgetData.noteType = "post-it"
                 } else {
                     widgetData.noteType = "plain"
                 }
-            } else if (widgetElement.classList.contains("song-widget")) {
+
+            // Code for extracting /songs collection fields
+            } else if (widgetElement.querySelector(".song-widget")) {
                 widgetData.widgetType = "song"
                 widgetData.songURL = widgetElement.querySelector("input").value
-                audioPlayer = "plain"
+                widgetData.songFrame = "plain"
             }
-            console.log(widgetData)
             return widgetData
         }
 
@@ -168,8 +175,8 @@
                 if (widgetElement.classList.contains("emptyWidget")) {
                     continue
                 }
-                let widgetData = extractWidgetData(widgetElement)
-                console.log(widgetData)
+                let widgetObject = extractWidgetData(widgetElement)
+                console.log(widgetObject)
             }
 
             // Then for each widget, create a new document in the appropriate collection and get the reference.
