@@ -240,6 +240,7 @@ body {
 
 .image-widget, .note-widget, .song-widget {
     height: 80%;
+    width: 100%;
 }
 
 /* Star Styling */
