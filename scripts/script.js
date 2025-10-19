@@ -11,7 +11,8 @@ function createWidgetElement(type, data = {}) {
     if (type === 'note') {
         // Note widget
         const textarea = document.createElement('textarea');
-        textarea.className = 'note-widget';
+        // FIXME: I am going to hard code the notebookPaper for all notes for now. 
+        textarea.className = 'note-widget notebookPaper';
         textarea.placeholder = 'Write your note here...';
         if (data.value) {
             textarea.value = data.value;
