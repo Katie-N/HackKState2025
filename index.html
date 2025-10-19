@@ -9,11 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body class="backgroundOfBody">
-    <button id="goToCalendar" onclick="goToCalendar()"><img src="./assets/icons/calendar.png"></button>
-    <!-- <button id="goToDiary">diary entry</button> -->
     <div class="banner" id="banner">
-        <h1>How Many Stars?</h1>
-        <h2>10/17/2025</h2>
+        <button id="goToCalendar" onclick="goToCalendar()"><img src="./assets/icons/calendarIcon.jpg"></button>
+        <div>
+            <h1>How Many Stars?</h1>
+            <h2>10/17/2025</h2>
+        </div>
+        <button id="sendToFirestore"><img src="./assets/icons/floppyDisc.jpg"></button>
     </div>
     <div id="calendarScreen">
         <div id="calendar" onclick="goToDiary()"></div>
