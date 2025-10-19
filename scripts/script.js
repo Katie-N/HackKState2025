@@ -200,6 +200,7 @@ Sortable.create(widgetsForDays, {
 
 function goToCalendar() {
     console.log("Going to calendar");
+    document.getElementById("dateIdentifierHeading").innerText = "October";
 
     // change background to white wall
     document.body.style.setProperty('--backgroundBodyImage', "linear-gradient(rgba(221, 155, 133, 0.55), rgba(221, 155, 133, 0.55)), url('../assets/WhiteWallTexture.jpg')");
@@ -217,6 +218,7 @@ function goToDiary(){
     // Delete all existing widgets except the empty one
     let widgetsForDay = document.getElementById("widgetsForDay");
     widgetsForDay.innerHTML = '<li class="emptyWidget widget-base widget-container"></li>';
+    document.getElementById("dateIdentifierHeading").innerText = this.dataset.date;
 
     window.pullDiaryEntryFromFirestore(this.dataset.date);
     // change background to corkboard
