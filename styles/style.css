@@ -162,6 +162,7 @@ body {
     resize: none;
     background-color: rgba(255, 255, 255, 0.8);
     font-family: "Montserrat";
+    font-size: 2rem;
 }
 
 .post-it {
@@ -176,6 +177,7 @@ body {
     background-image: url("../assets/crinklyLinedPaper.jpg");
     background-size: cover;
     background-position: left;
+    padding: 9vmin;
 }
 
 /* Image widget styles */
@@ -183,7 +185,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .image-widget img {
