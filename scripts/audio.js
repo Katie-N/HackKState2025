@@ -1,5 +1,5 @@
 let audiotest = new Audio('./audio/1 star review.m4a');
-let A = new Audio('./audio/A.m4a');
+let A = new Audio('./audio/Processed/A.m4a');
 let B = new Audio('./audio/B.m4a');
 let C = new Audio('./audio/C.m4a');
 A.preload = 'auto';
