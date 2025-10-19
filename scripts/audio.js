@@ -1,4 +1,4 @@
-let audiotest = new Audio('./audio/1 star review.m4a');
+let mainAudio = new Audio('./audio/Processed/Main.mp3');
 let A = new Audio('./audio/Processed/A.mp3');
 let B = new Audio('./audio/Processed/B.mp3');
 let C = new Audio('./audio/Processed/C.mp3');
@@ -51,16 +51,17 @@ W.preload = 'auto';
 X.preload = 'auto';
 Y.preload = 'auto';
 Z.preload = 'auto';
-audiotest.preload = 'auto';
+mainAudio.preload = 'auto';
 let duration = NaN; // set duration to NaN so it can be called later
 function setDuration(){
-    duration = audiotest.duration;
+    duration = mainAudio.duration;
     duration = Math.floor(duration * 1000); // convert to milliseconds
     }
-audiotest.addEventListener('loadedmetadata', setDuration, { once: true }); // Loads duration once metadata is loaded
+mainAudio.addEventListener('loadedmetadata', setDuration, { once: true }); // Loads duration once metadata is loaded
 
 document.body.addEventListener("click", function () {
-    audiotest.play();
+  mainAudio.loop = true;
+    mainAudio.play();
     /*let loopCount = 6;
     function wampWamp() {
         if (loopCount > 0) {
