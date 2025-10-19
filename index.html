@@ -1,6 +1,8 @@
 <HTML>
 <head>
-    <title>Calendar</title>
+    <title>
+        ⭐How Many Stars?⭐
+    </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./styles/style.css">
     <!-- Load fonts -->
@@ -13,12 +15,12 @@
         <button id="goToCalendar" onclick="goToCalendar()"><img src="./assets/icons/calendarIcon.jpg"></button>
         <div>
             <h1>How Many Stars?</h1>
-            <h2>10/17/2025</h2>
+            <h2 id="dateIdentifierHeading">October</h2>
         </div>
         <button id="sendToFirestore"><img src="./assets/icons/floppyDisc.jpg"></button>
     </div>
     <div id="calendarScreen">
-        <div id="calendar" onclick="goToDiary()"></div>
+        <div id="calendar"></div>
     </div>
     <div id="diaryEntryScreen">
         <div id="widgetDisplayArea">
@@ -34,15 +36,12 @@
             <li><img src="./assets/icons/music-playerIcon.png">Song</li>
         </ul>
     </div>
+
+    <!-- All of the many scripts are below -->
    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 
-   <script src="./scripts/script.js"></script>
    <script src="./scripts/audio.js"></script>
-   <!-- <script src="./scripts/fittext.js"></script>
-   <script>
-    window.fitText( document.getElementById("bannerh1"), 1.5 );
-    </script> -->
-    <!-- <script type="module" src="./scripts/firebaseApp.js"></script> -->
+
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
@@ -99,50 +98,59 @@
         // Make the upload function available globally
         window.uploadImageToFirebase = uploadImageToFirebase;
 
-        // Pull diary entry from firestore for specific day
-        // Do this once when the diary entry is clicked on. 
-        let docRef = doc(db, "diaryEntries", "10-18-2025");
-        let docSnap = await getDoc(docRef);
+        // This function takes a date in the format "MM-DD-YYYY"
+        // And populates the widgets with the corresponding diary entry from firestore
+        // If the diary entry does not exist yet, it leaves the widgets area blank for creation.
+        async function pullDiaryEntryFromFirestore(date){
+            console.log("Pulling diary entry from firestore");
+            // Pull diary entry from firestore for specific day
+            // Do this once when the diary entry is clicked on. 
+            let docRef = doc(db, "diaryEntries", date);
+            let docSnap = await getDoc(docRef);
 
-        // If the diary entry for this day already exists, populate
-        if (docSnap.exists()) {
-            // Get the references to widgets for thos entry
-            let references = docSnap.data()
-            //rating variables
-            let averageRating = 0;
-            let i = 0
-            let rating = 0;
+            // If the diary entry for this day already exists, populate
+            if (docSnap.exists()) {
+                // Get the references to widgets for thos entry
+                let references = docSnap.data()
+                //rating variables
+                let averageRating = 0;
+                let i = 0
+                let rating = 0;
 
-            // Loop through each referenced object and create an HTML element for it
-            for (let key in references) {
-                let collection = references[key].parent.id
-                docRef = doc(db, collection, references[key].id);
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    references[key] = docSnap.data()
-                } else {
-                    console.log("No such document for widget reference:", references[key]);
-                    continue
-                }
-                console.log(references[key])
+                // Loop through each referenced object and create an HTML element for it
+                for (let key in references) {
+                    let collection = references[key].parent.id
+                    docRef = doc(db, collection, references[key].id);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        references[key] = docSnap.data()
+                    } else {
+                        console.log("No such document for widget reference:", references[key]);
+                        continue
+                    }
+                    console.log(references[key])
 
-                rating += references[key].rating;
-                i += 1;
+                    rating += references[key].rating;
+                    i += 1;
 
-                let widgetElement = transformWidgetToElement(key, references[key])
-                document.getElementById("widgetsForDay").appendChild(widgetElement)
-                
-            }   
-            averageRating = rating / i;
-            console.log("Average rating for the day:", averageRating);     
-            // Always move the empty widget to the end.
-            let widgetsForDays = document.getElementById("widgetsForDay")
-            let el = widgetsForDays.querySelector(".emptyWidget") 
-            widgetsForDays.appendChild(el);
-        } else {
-        console.log("No such document!");
-        // No data for this so default go to creation mode. 
-        }
+                    let widgetElement = transformWidgetToElement(key, references[key])
+                    document.getElementById("widgetsForDay").appendChild(widgetElement)
+                    
+                }   
+                averageRating = rating / i;
+                console.log("Average rating for the day:", averageRating);     
+                // Always move the empty widget to the end.
+                let widgetsForDays = document.getElementById("widgetsForDay")
+                let el = widgetsForDays.querySelector(".emptyWidget") 
+                widgetsForDays.appendChild(el);
+            } else {
+            console.log("No such document!");
+            // No data for this so default go to creation mode. 
+            }
+        }  
+        
+        // Attach this function to the window so it can be called from goToDiary() in script.js
+        window.pullDiaryEntryFromFirestore = pullDiaryEntryFromFirestore;
 
         function extractWidgetData(widgetElement) {
             console.log(widgetElement)
@@ -223,16 +231,7 @@
         }        
         document.getElementById("sendToFirestore").addEventListener("click", saveDiaryEntryToFirestore);
     </script>
-    <!-- <script>
-        const myCustomDataEvent = new CustomEvent('saveDiaryEntry', {
-            detail: {
-                message: 'Hello from custom event!',
-                timestamp: Date.now()
-            }
-        });
-        document.getElementById("sendToFirestore").dispatchEvent(myCustomDataEvent);
-        saveDiaryToFirestore("help me")
-    </script> -->
-
+    <script src="./scripts/script.js"></script>
+    <script src="./scripts/populateCalendar.js"></script>
 </body>
 </HTML>

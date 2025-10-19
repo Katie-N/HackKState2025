@@ -88,8 +88,8 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    padding-top: 22%;
-    padding-bottom: 5%;
+    padding-top: 22vmin;
+    padding-bottom: 5vmin;
 }
 
 .backgroundOfBody {
@@ -290,4 +290,9 @@ body {
 }
 .emptyStar {
     background-color: transparent;
+}
+
+/* Calendar Styling */
+.calendarCell {
+    padding: 5%;
 }
