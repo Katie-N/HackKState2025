@@ -3,7 +3,6 @@ console.log("Hello world")
 // Functions to transform widgets into their editable versions
 // Unified widget creation and transformation
 function createWidgetElement(type, data = {}) {
-    console.log(data)
     const element = document.createElement('li');
     element.className = 'widget-base widget-container';
     if (type === 'note') {
@@ -84,6 +83,7 @@ function createWidgetElement(type, data = {}) {
     }
     starContainer = document.createElement('div')
     starContainer.className = 'starContainer';
+    starContainer.dataset.currentRating = data.rating
     for (let i = 1; i < 6; i++) {
         
         // Make the star clickable
@@ -106,25 +106,44 @@ function createWidgetElement(type, data = {}) {
     element.appendChild(starContainer);
     return element;
 }
+let oneStar = new Audio('./audio/Processed/oneStar.mp3');
+let twoStar = new Audio('./audio/Processed/twoStar.mp3');
+let threeStar = new Audio('./audio/Processed/threeStar.mp3');
+let fourStar = new Audio('./audio/Processed/fourStar.mp3');
+let fiveStar = new Audio('./audio/Processed/fiveStar.mp3');
+oneStar.preload = 'auto';
+twoStar.preload = 'auto';
+threeStar.preload = 'auto';
+fourStar.preload = 'auto';
+fiveStar.preload = 'auto';
 
 function rateWidget() {
     if (this.classList.contains('star1')) {
+        oneStar.play();
         numStars = 1
     } else if (this.classList.contains('star2')) {
+        twoStar.play();
         numStars = 2
     } else if (this.classList.contains('star3')) {
+        threeStar.play();
         numStars = 3
     } else if (this.classList.contains('star4')) {
+        fourStar.play();
         numStars = 4
     } else if (this.classList.contains('star5')) {
+        fiveStar.play();
         numStars = 5
     }
+
+    // Note that camel case is turned into all lowercase separated by dashes in html.
+    // So currentRating becomes data-current-rating
+    this.parentNode.dataset.currentRating = numStars
 
     for (i in this.parentNode.children) {
         if (i < numStars) {
             this.parentNode.children[i].classList.remove('emptyStar');
             this.parentNode.children[i].classList.add('filledStar');
-        } else {
+        } else if (i < 5){
             this.parentNode.children[i].classList.remove('filledStar');
             this.parentNode.children[i].classList.add('emptyStar');
         }
