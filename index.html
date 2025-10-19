@@ -161,14 +161,15 @@
             // Code for extracting /songs collection fields
             } else if (widgetElement.querySelector(".song-widget")) {
                 widgetData.widgetType = "song"
-                widgetData.songURL = widgetElement.querySelector("input").value
+                widgetData.songName = widgetElement.querySelector("input").value
                 widgetData.songFrame = "plain"
             }
             return widgetData
         }
 
         // TODO: push diary entry to firestore for specific day
-        function saveDiaryEntryToFirestore() {
+        async function saveDiaryEntryToFirestore() {
+            let allWidgetObjects = []
             // First, loop through all of the elements in the diary entry and extract the widget info. 
             for (let widgetElement of document.getElementById("widgetsForDay").children) {
                 // Skip empty widget
@@ -177,11 +178,36 @@
                 }
                 let widgetObject = extractWidgetData(widgetElement)
                 console.log(widgetObject)
+                allWidgetObjects.push(widgetObject)
             }
 
+            let diaryEntryData = {}
             // Then for each widget, create a new document in the appropriate collection and get the reference.
+            let i = 0
+            for (let widgetObject of allWidgetObjects) {
+                let collectionName = ""
+                if (widgetObject.widgetType == "picture") {
+                    collectionName = "pictures"
+                } else if (widgetObject.widgetType == "note") {
+                    collectionName = "notes"
+                } else if (widgetObject.widgetType == "song") {
+                    collectionName = "songs"
+                } else {
+                    console.error("Unknown widget type:", widgetObject.widgetType)
+                    continue
+                }
+                // Create a new document in the appropriate collection
+                const docRef = await addDoc(collection(db, collectionName), widgetObject);
+                console.log("Document written with ID: ", docRef.id);
+
+                // Store the reference for later use in the diary entry
+                widgetObject.docRef = docRef
+                diaryEntryData[`widget_${i+1}`] = widgetObject.docRef
+                i +=1
+            }
 
             // Finally, create or update the diary entry document with the references to each widget.
+            await setDoc(doc(db, "diaryEntries", "10-17-2025"), diaryEntryData);
         }        
         document.getElementById("sendToFirestore").addEventListener("click", saveDiaryEntryToFirestore);
     </script>
