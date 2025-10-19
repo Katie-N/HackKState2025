@@ -135,17 +135,24 @@ function goToCalendar() {
     document.body.style.setProperty('--diaryEntryDisplay', 'none')
     // change display of #calendar to block
     document.body.style.setProperty('--calendarDisplay', 'block')
-
+    
+    // When we go to the calendar, we don't need to see the link to go to the calendar or the button to send the diary entry to Firestore
+    document.getElementById("goToCalendar").style.display = "none";
+    document.getElementById("sendToFirestore").style.display = "none";
 }
 function goToDiary(date){
     console.log("Going to diary");
 
-// change background to corkboard
+    // change background to corkboard
     document.body.style.setProperty('--backgroundBodyImage', "url('../assets/BrownPaperBackground.jpg')");
     // change display of #diaryEntryScreen to block
     document.body.style.setProperty('--diaryEntryDisplay', 'block')
     // change display of #calendar to none
     document.body.style.setProperty('--calendarDisplay', 'none')
+
+    // When we go to the calendar, we don't need to see the link to go to the calendar or the button to send the diary entry to Firestore
+    document.getElementById("goToCalendar").style.display = "block";
+    document.getElementById("sendToFirestore").style.display = "block";
 
 }
 
