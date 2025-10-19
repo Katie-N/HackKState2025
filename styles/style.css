@@ -164,6 +164,19 @@ body {
     font-family: "Montserrat";
 }
 
+.post-it {
+    background-image: url("../assets/postItNote.jpg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.notebookPaper {
+    background-image: url("../assets/crinklyLinedPaper.jpg");
+    background-size: cover;
+    background-position: left;
+}
+
 /* Image widget styles */
 .image-widget {
     display: flex;
@@ -215,7 +228,14 @@ body {
 
 .song-widget .song-preview {
     width: 80%;
-    margin-top: 20px;
+}
+.song-preview {
+    background-image: url("../assets/greenRecordPlayer.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: inherit;
+    margin: auto;
+    background-position: center;
 }
 
 #goToCalendar, #sendToFirestore {
@@ -240,6 +260,7 @@ body {
 
 .image-widget, .note-widget, .song-widget {
     height: 80%;
+    width: 100%;
 }
 
 /* Star Styling */

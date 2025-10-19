@@ -11,7 +11,10 @@ function createWidgetElement(type, data = {}) {
         const textarea = document.createElement('textarea');
         textarea.className = 'note-widget';
         textarea.placeholder = 'Write your note here...';
-        if (data.value) textarea.value = data.value;
+        if (data.value) {
+            textarea.value = data.value;
+            textarea.className += " " + data.noteType;
+        }
         element.innerHTML = '';
         element.appendChild(textarea);
     } else if (type === 'picture') {
@@ -66,9 +69,13 @@ function createWidgetElement(type, data = {}) {
         const input = document.createElement('input');
         input.type = 'text';
         input.placeholder = 'Paste your song link here...';
+        const preview = document.createElement('a');
         // Populate the song name if it is coming from Firebase
-        if (data.songName) input.value = data.songName;
-        const preview = document.createElement('div');
+        if (data.songName) {
+            input.value = data.songName;
+            preview.href="https://open.spotify.com/search/" + encodeURI(data.songName)
+            preview.target = "_blank";
+        }
         preview.className = 'song-preview';
         container.appendChild(input);
         container.appendChild(preview);
@@ -186,6 +193,7 @@ function goToCalendar() {
     document.getElementById("goToCalendar").style.display = "none";
     document.getElementById("sendToFirestore").style.display = "none";
 }
+
 function goToDiary(date){
     console.log("Going to diary");
 
@@ -199,7 +207,6 @@ function goToDiary(date){
     // When we go to the calendar, we don't need to see the link to go to the calendar or the button to send the diary entry to Firestore
     document.getElementById("goToCalendar").style.display = "block";
     document.getElementById("sendToFirestore").style.display = "block";
-
 }
 
 function transformWidgetToElement(key, widgetData) {
