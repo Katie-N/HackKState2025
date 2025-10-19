@@ -69,6 +69,7 @@
 
         const db = getFirestore(app);
         const storage = getStorage(app);
+        //console.log(db);
 
         // Function to handle image upload
         async function uploadImageToFirebase(file) {
@@ -107,6 +108,11 @@
         if (docSnap.exists()) {
             // Get the references to widgets for thos entry
             let references = docSnap.data()
+            //rating variables
+            let averageRating = 0;
+            let i = 0
+            let rating = 0;
+
             // Loop through each referenced object and create an HTML element for it
             for (let key in references) {
                 let collection = references[key].parent.id
@@ -118,11 +124,17 @@
                     console.log("No such document for widget reference:", references[key]);
                     continue
                 }
+                console.log(references[key])
+
+                rating += references[key].rating;
+                i += 1;
 
                 let widgetElement = transformWidgetToElement(key, references[key])
                 document.getElementById("widgetsForDay").appendChild(widgetElement)
                 
-            }
+            }   
+            averageRating = rating / i;
+            console.log("Average rating for the day:", averageRating);     
             // Always move the empty widget to the end.
             let widgetsForDays = document.getElementById("widgetsForDay")
             let el = widgetsForDays.querySelector(".emptyWidget") 
