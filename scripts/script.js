@@ -4,6 +4,9 @@ console.log("Hello world")
 // Unified widget creation and transformation
 function createWidgetElement(type, data = {}) {
     const element = document.createElement('li');
+    clickSound = new Audio('./audio/Processed/click.mp3');
+    clickSound.preload = 'auto';
+    clickSound.play();
     element.className = 'widget-base widget-container';
     if (type === 'note') {
         // Note widget
