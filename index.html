@@ -138,6 +138,8 @@
                     
                 }   
                 averageRating = rating / i;
+                averageRating = Math.round(averageRating * 10) / 10; // Round to 1 decimal place
+                document.getElementById("dateIdentifierHeading").innerText = `${date}: ⭐${averageRating}`
                 console.log("Average rating for the day:", averageRating);     
                 // Always move the empty widget to the end.
                 let widgetsForDays = document.getElementById("widgetsForDay")
