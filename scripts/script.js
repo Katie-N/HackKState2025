@@ -123,7 +123,7 @@ function rateWidget() {
         if (i < numStars) {
             this.parentNode.children[i].classList.remove('emptyStar');
             this.parentNode.children[i].classList.add('filledStar');
-        } else {
+        } else if (i < 5){
             this.parentNode.children[i].classList.remove('filledStar');
             this.parentNode.children[i].classList.add('emptyStar');
         }
