@@ -92,11 +92,36 @@ function createWidgetElement(type, data = {}) {
         }
 
         // When the star is clicked, it should toggle the rating of that widget to the star value.
-        star.onclick="rateWidget()";
+        // star.onclick="rateWidget()";
+        star.addEventListener('click', rateWidget);
         starContainer.appendChild(star);
     }
     element.appendChild(starContainer);
     return element;
+}
+
+function rateWidget() {
+    if (this.classList.contains('star1')) {
+        numStars = 1
+    } else if (this.classList.contains('star2')) {
+        numStars = 2
+    } else if (this.classList.contains('star3')) {
+        numStars = 3
+    } else if (this.classList.contains('star4')) {
+        numStars = 4
+    } else if (this.classList.contains('star5')) {
+        numStars = 5
+    }
+
+    for (i in this.parentNode.children) {
+        if (i < numStars) {
+            this.parentNode.children[i].classList.remove('emptyStar');
+            this.parentNode.children[i].classList.add('filledStar');
+        } else {
+            this.parentNode.children[i].classList.remove('filledStar');
+            this.parentNode.children[i].classList.add('emptyStar');
+        }
+    }
 }
 
 // This makes the list of available widgets selectable
@@ -189,9 +214,3 @@ function transformWidgetToElement(key, widgetData) {
 // goToCalendar();
 // Right now I'm working on the diary entry page so I will skip the hassle of clicking the button and just go to it first thing
 goToDiary();
-// document.getElementById("goToCalendar").addEventListener("click", goToCalendar);
-// document.getElementById("goToDiary").addEventListener("click", goToDiary);
-
-function rateWidget() {
-    console.log("Toggling star");
-}
