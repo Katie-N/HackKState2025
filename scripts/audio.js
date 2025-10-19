@@ -80,7 +80,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'a' || event.key === 'A') {
     A.play()
-    console.log("The 'a' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -90,7 +89,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'b' || event.key === 'B') {
     B.play()
-    console.log("The 'b' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -100,7 +98,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'c' || event.key === 'C') {
     C.play()
-    console.log("The 'c' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -110,7 +107,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'd' || event.key === 'D') {
     D.play()
-    console.log("The 'd' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -120,7 +116,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'e' || event.key === 'E') {
     E.play()
-    console.log("The 'e' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -130,7 +125,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'f' || event.key === 'F') {
     F.play()
-    console.log("The 'f' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -140,7 +134,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'g' || event.key === 'G') {
     G.play()
-    console.log("The 'g' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -150,7 +143,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'h' || event.key === 'H') {
     H.play()
-    console.log("The 'h' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -160,7 +152,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'i' || event.key === 'I') {
     I.play()
-    console.log("The 'i' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -170,7 +161,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'j' || event.key === 'J') {
     J.play()
-    console.log("The 'j' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -180,7 +170,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'k' || event.key === 'K') {
     K.play()
-    console.log("The 'k' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -190,7 +179,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'l' || event.key === 'L') {
     L.play()
-    console.log("The 'a' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -200,7 +188,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'm' || event.key === 'M') {
     M.play()
-    console.log("The 'a' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -210,7 +197,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'n' || event.key === 'N') {
     N.play()
-    console.log("The 'a' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -220,7 +206,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'o' || event.key === 'O') {
     O.play()
-    console.log("The 'a' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -230,7 +215,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'p' || event.key === 'P') {
     P.play()
-    console.log("The 'a' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -240,7 +224,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'q' || event.key === 'Q') {
     Q.play()
-    console.log("The 'a' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -250,7 +233,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'r' || event.key === 'R') {
     R.play()
-    console.log("The 'a' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -260,7 +242,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 's' || event.key === 'S') {
     S.play()
-    console.log("The 'a' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -270,7 +251,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 't' || event.key === 'T') {
     T.play()
-    console.log("The 'a' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -280,7 +260,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'u' || event.key === 'U') {
     U.play()
-    console.log("The 'a' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -290,7 +269,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'v' || event.key === 'V') {
     V.play()
-    console.log("The 'a' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -300,7 +278,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'w' || event.key === 'W') {
     W.play()
-    console.log("The 'a' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -310,7 +287,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'x' || event.key === 'X') {
      X.play()
-    console.log("The 'a' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -320,7 +296,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'y' || event.key === 'Y') {
     Y.play()
-    console.log("The 'a' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
@@ -330,7 +305,6 @@ document.addEventListener('keydown', function(event) {
   // Check if the pressed key is 'a' (case-insensitive)
   if (event.key === 'z' || event.key === 'Z') {
     Z.play()
-    console.log("The 'a' key was pressed!");
     // You can add your desired actions here
     // For example, change the background color:
     // document.body.style.backgroundColor = 'lightblue';
