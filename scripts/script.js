@@ -214,10 +214,11 @@ function goToCalendar() {
 }
 
 function goToDiary(){
-    console.log(this.dataset.date)
-    console.log("Going to day");
-    window.pullDiaryEntryFromFirestore(this.dataset.date);
+    // Delete all existing widgets except the empty one
+    let widgetsForDay = document.getElementById("widgetsForDay");
+    widgetsForDay.innerHTML = '<li class="emptyWidget widget-base widget-container"></li>';
 
+    window.pullDiaryEntryFromFirestore(this.dataset.date);
     // change background to corkboard
     document.body.style.setProperty('--backgroundBodyImage', "url('../assets/BrownPaperBackground.jpg')");
     // change display of #diaryEntryScreen to block
