@@ -223,16 +223,6 @@
         }        
         document.getElementById("sendToFirestore").addEventListener("click", saveDiaryEntryToFirestore);
     </script>
-    <!-- <script>
-        const myCustomDataEvent = new CustomEvent('saveDiaryEntry', {
-            detail: {
-                message: 'Hello from custom event!',
-                timestamp: Date.now()
-            }
-        });
-        document.getElementById("sendToFirestore").dispatchEvent(myCustomDataEvent);
-        saveDiaryToFirestore("help me")
-    </script> -->
-
+    <script src="./scripts/populateCalendar.js"></script>
 </body>
 </HTML>

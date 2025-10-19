@@ -237,6 +237,5 @@ function transformWidgetToElement(key, widgetData) {
 }
 
 // Always go to calendar on load
-// goToCalendar();
-// Right now I'm working on the diary entry page so I will skip the hassle of clicking the button and just go to it first thing
-goToDiary();
+goToCalendar();
+// goToDiary();
