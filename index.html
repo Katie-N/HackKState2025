@@ -69,7 +69,6 @@
 
         const db = getFirestore(app);
         const storage = getStorage(app);
-        console.log(db);
 
         // Function to handle image upload
         async function uploadImageToFirebase(file) {
@@ -133,8 +132,62 @@
         // No data for this so default go to creation mode. 
         }
 
+        function extractWidgetData(widgetElement) {
+            let widgetData = {}
+            widgetData.rating = widgetElement.querySelector(".starRating").getAttribute("data-rating")
+            if (widgetElement.classList.contains("image-widget")) {
+                widgetData.widgetType = "picture"
+                widgetData.imageURL = widgetElement.querySelector("img").src
+                widgetData.photoFrame = "plain" // TODO: get photo frame type
+            } else if (widgetElement.classList.contains("note-widget")) {
+                widgetData.widgetType = "note"
+                widgetData.text = widgetElement.querySelector("textarea").value
+                widgetData.noteType = widgetElement.querySelector()
+                // Widget Type depends on what class is applied to the note widget. 
+                if (widgetElement.classList.contains("notebookPaper")) {
+                    widgetData.noteType = "notebookPaper";
+                } else if (widgetElement.classList.contains("post-it")) {
+                    widgetData.noteType = "stickyNote"
+                } else {
+                    widgetData.noteType = "plain"
+                }
+            } else if (widgetElement.classList.contains("song-widget")) {
+                widgetData.widgetType = "song"
+                widgetData.songURL = widgetElement.querySelector("input").value
+                audioPlayer = "plain"
+            }
+            console.log(widgetData)
+            return widgetData
+        }
+
         // TODO: push diary entry to firestore for specific day
-        
+        function saveDiaryEntryToFirestore() {
+            // First, loop through all of the elements in the diary entry and extract the widget info. 
+            for (let widgetElement of document.getElementById("widgetsForDay").children) {
+                // Skip empty widget
+                if (widgetElement.classList.contains("emptyWidget")) {
+                    continue
+                }
+                let widgetData = extractWidgetData(widgetElement)
+                console.log(widgetData)
+            }
+
+            // Then for each widget, create a new document in the appropriate collection and get the reference.
+
+            // Finally, create or update the diary entry document with the references to each widget.
+        }        
+        document.getElementById("sendToFirestore").addEventListener("click", saveDiaryEntryToFirestore);
     </script>
+    <!-- <script>
+        const myCustomDataEvent = new CustomEvent('saveDiaryEntry', {
+            detail: {
+                message: 'Hello from custom event!',
+                timestamp: Date.now()
+            }
+        });
+        document.getElementById("sendToFirestore").dispatchEvent(myCustomDataEvent);
+        saveDiaryToFirestore("help me")
+    </script> -->
+
 </body>
 </HTML>

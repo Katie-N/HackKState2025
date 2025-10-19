@@ -3,7 +3,6 @@ console.log("Hello world")
 // Functions to transform widgets into their editable versions
 // Unified widget creation and transformation
 function createWidgetElement(type, data = {}) {
-    console.log(data)
     const element = document.createElement('li');
     element.className = 'widget-base widget-container';
     if (type === 'note') {
