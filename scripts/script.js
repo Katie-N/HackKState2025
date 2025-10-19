@@ -213,8 +213,10 @@ function goToCalendar() {
     document.getElementById("sendToFirestore").style.display = "none";
 }
 
-function goToDiary(date){
-    console.log("Going to diary");
+function goToDiary(){
+    console.log(this.dataset.date)
+    console.log("Going to day");
+    window.pullDiaryEntryFromFirestore(this.dataset.date);
 
     // change background to corkboard
     document.body.style.setProperty('--backgroundBodyImage', "url('../assets/BrownPaperBackground.jpg')");

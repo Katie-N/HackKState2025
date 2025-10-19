@@ -13,5 +13,7 @@ for (let day = 1; day <= 31; day++) {
     let calendarCell = document.createElement("div")
     calendarCell.className = "calendarCell"
     calendarCell.innerText = day
+    calendarCell.dataset.date = `10-${day.toString().padStart(2, '0')}-2025` // Store date in dataset for later use
+    calendarCell.addEventListener("click", goToDiary)
     calendar.appendChild(calendarCell)
 }
