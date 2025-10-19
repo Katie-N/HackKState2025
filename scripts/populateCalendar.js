@@ -15,5 +15,26 @@ for (let day = 1; day <= 31; day++) {
     calendarCell.innerText = day
     calendarCell.dataset.date = `10-${day.toString().padStart(2, '0')}-2025` // Store date in dataset for later use
     calendarCell.addEventListener("click", goToDiary)
+
+    // Check for diary entry and display avgRating if exists
+    // This requires window.db and Firestore to be available
+    if (window.db && window.firebaseInitialized) {
+        (async () => {
+            const { doc, getDoc } = window.firestoreFns;
+            let dateKey = calendarCell.dataset.date;
+            console.log(dateKey);
+            let docRef = doc(window.db, "diaryEntries", dateKey);
+            let docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                let data = docSnap.data();
+                if (data.avgRating !== undefined) {
+                    let ratingDiv = document.createElement('div');
+                    ratingDiv.className = 'calendarAvgRating';
+                    ratingDiv.innerText = `⭐${data.avgRating}`;
+                    calendarCell.appendChild(ratingDiv);
+                }
+            }
+        })();
+    }
     calendar.appendChild(calendarCell)
 }

@@ -48,6 +48,7 @@
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
         import { getFirestore, doc, setDoc, collection, addDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-storage.js";
+        window.firestoreFns = {doc, getDoc}
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
         // Your web app's Firebase configuration
@@ -67,8 +68,10 @@
         const analytics = getAnalytics(app);
 
         const db = getFirestore(app);
+        window.db = db; // Make db accessible globally for the populateCalendar.js script
         const storage = getStorage(app);
-        //console.log(db);
+        
+        window.firebaseInitialized = true;
 
         // Function to handle image upload
         async function uploadImageToFirebase(file) {
@@ -117,8 +120,14 @@
                 let i = 0
                 let rating = 0;
 
-                // Loop through each referenced object and create an HTML element for it
+                // Loop through each key in the document
                 for (let key in references) {
+                    // Skip avgRating as it's not a reference
+                    if (key === 'avgRating') {
+                        continue;
+                    }
+
+                    // Handle widget references
                     let collection = references[key].parent.id
                     docRef = doc(db, collection, references[key].id);
                     const docSnap = await getDoc(docRef);
@@ -138,6 +147,8 @@
                     
                 }   
                 averageRating = rating / i;
+                averageRating = Math.round(averageRating * 10) / 10; // Round to 1 decimal place
+                document.getElementById("dateIdentifierHeading").innerText = `${date}: ⭐${averageRating}`
                 console.log("Average rating for the day:", averageRating);     
                 // Always move the empty widget to the end.
                 let widgetsForDays = document.getElementById("widgetsForDay")
@@ -190,50 +201,84 @@
         // Push diary entry to firestore for specific day
         async function saveDiaryEntryToFirestore() {
             console.log("Current diary date", currentDiaryDate)
-            let allWidgetObjects = []
+            let allWidgetObjects = [];
+            let totalRating = 0;
+            let numRated = 0;
             // First, loop through all of the elements in the diary entry and extract the widget info. 
             for (let widgetElement of document.getElementById("widgetsForDay").children) {
                 // Skip empty widget
                 if (widgetElement.classList.contains("emptyWidget")) {
-                    continue
+                    continue;
                 }
-                let widgetObject = extractWidgetData(widgetElement)
-                console.log(widgetObject)
-                allWidgetObjects.push(widgetObject)
+                let widgetObject = extractWidgetData(widgetElement);
+                console.log(widgetObject);
+                allWidgetObjects.push(widgetObject);
+                if (typeof widgetObject.rating === 'number' && !isNaN(widgetObject.rating)) {
+                    totalRating += widgetObject.rating;
+                    numRated += 1;
+                }
             }
 
-            let diaryEntryData = {}
+            let diaryEntryData = {};
             // Then for each widget, create a new document in the appropriate collection and get the reference.
-            let i = 0
+            let i = 0;
             for (let widgetObject of allWidgetObjects) {
-                let collectionName = ""
+                let collectionName = "";
                 if (widgetObject.widgetType == "picture") {
-                    collectionName = "pictures"
+                    collectionName = "pictures";
                 } else if (widgetObject.widgetType == "note") {
-                    collectionName = "notes"
+                    collectionName = "notes";
                 } else if (widgetObject.widgetType == "song") {
-                    collectionName = "songs"
+                    collectionName = "songs";
                 } else {
-                    console.error("Unknown widget type:", widgetObject.widgetType)
-                    continue
+                    console.error("Unknown widget type:", widgetObject.widgetType);
+                    continue;
                 }
                 // Create a new document in the appropriate collection
                 const docRef = await addDoc(collection(db, collectionName), widgetObject);
                 console.log("Document written with ID: ", docRef.id);
 
                 // Store the reference for later use in the diary entry
-                widgetObject.docRef = docRef
-                diaryEntryData[`widget_${i+1}`] = widgetObject.docRef
-                i +=1
+                widgetObject.docRef = docRef;
+                diaryEntryData[`widget_${i+1}`] = widgetObject.docRef;
+                i += 1;
             }
+
+            // Calculate and store the average rating for the day
+            let avgRating = numRated > 0 ? Math.round((totalRating / numRated) * 10) / 10 : 0;
+            diaryEntryData.avgRating = avgRating;
 
             // Finally, create or update the diary entry document with the references to each widget.
             await setDoc(doc(db, "diaryEntries", currentDiaryDate), diaryEntryData);
+
+            // Update the calendar cell with the new average rating
+            const dateCell = document.querySelector(`.calendarCell[data-date="${currentDiaryDate}"]`);
+            if (dateCell) {
+                // Remove existing rating if any
+                const existingRating = dateCell.querySelector('.calendarAvgRating');
+                if (existingRating) {
+                    existingRating.remove();
+                }
+                // Add new rating if there is one
+                if (avgRating > 0) {
+                    let ratingDiv = document.createElement('div');
+                    ratingDiv.className = 'calendarAvgRating';
+                    ratingDiv.innerText = `⭐${avgRating}`;
+                    dateCell.appendChild(ratingDiv);
+                }
+            }
+
+            // Update the banner with the new average rating
+            document.getElementById("dateIdentifierHeading").innerText = `${currentDiaryDate}: ⭐${avgRating}`;
         }
         window.saveDiaryEntryToFirestore = saveDiaryEntryToFirestore;
         document.getElementById("sendToFirestore").addEventListener("click", saveDiaryEntryToFirestore);
+
+        // Now that Firebase is initialized, populate the calendar
+        const script = document.createElement('script');
+        script.src = './scripts/populateCalendar.js';
+        document.body.appendChild(script);
     </script>
     <script src="./scripts/script.js"></script>
-    <script src="./scripts/populateCalendar.js"></script>
 </body>
 </HTML>
