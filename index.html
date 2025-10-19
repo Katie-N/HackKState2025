@@ -187,8 +187,9 @@
             return widgetData
         }
 
-        // TODO: push diary entry to firestore for specific day
+        // Push diary entry to firestore for specific day
         async function saveDiaryEntryToFirestore() {
+            console.log("Current diary date", currentDiaryDate)
             let allWidgetObjects = []
             // First, loop through all of the elements in the diary entry and extract the widget info. 
             for (let widgetElement of document.getElementById("widgetsForDay").children) {
@@ -227,8 +228,9 @@
             }
 
             // Finally, create or update the diary entry document with the references to each widget.
-            await setDoc(doc(db, "diaryEntries", "10-17-2025"), diaryEntryData);
-        }        
+            await setDoc(doc(db, "diaryEntries", currentDiaryDate), diaryEntryData);
+        }
+        window.saveDiaryEntryToFirestore = saveDiaryEntryToFirestore;
         document.getElementById("sendToFirestore").addEventListener("click", saveDiaryEntryToFirestore);
     </script>
     <script src="./scripts/script.js"></script>

@@ -214,11 +214,15 @@ function goToCalendar() {
     document.getElementById("sendToFirestore").style.display = "none";
 }
 
+currentDiaryDate = null
 function goToDiary(){
     // Delete all existing widgets except the empty one
     let widgetsForDay = document.getElementById("widgetsForDay");
     widgetsForDay.innerHTML = '<li class="emptyWidget widget-base widget-container"></li>';
     document.getElementById("dateIdentifierHeading").innerText = this.dataset.date;
+    
+    // Update the global variable so the save function knows what date we are on
+    currentDiaryDate = this.dataset.date;
 
     window.pullDiaryEntryFromFirestore(this.dataset.date);
     // change background to corkboard
