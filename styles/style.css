@@ -149,11 +149,7 @@ body {
 
 /* Base widget styles */
 .widget-base {
-    width: 80vmin;
-    height: 80vmin;
     margin: auto;
-    margin-bottom: 5vmin;
-    background-color: rgba(255, 255, 255, 0.8);
     font-family: "Montserrat";
 }
 
@@ -188,7 +184,7 @@ body {
 .image-widget button {
     padding: 10px 20px;
     font-family: "Montserrat";
-    margin-top: 10px;
+    /* margin-top: 10px; */
     border: none;
     background-color: #ddd;
     cursor: pointer;
@@ -230,4 +226,44 @@ body {
 #goToCalendar img, #sendToFirestore img {
     width: 100%;
     height: auto;
+}
+
+.widget-container {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    margin-bottom: 5vmin;
+    width: 80vmin;
+    height: 80vmin;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.image-widget, .note-widget, .song-widget {
+    height: 80%;
+}
+
+/* Star Styling */
+.starContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    height:20%;
+}
+.star {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    background-image: url("../assets/icons/emptyStar.png");
+    /* The star should be as big as its container */
+    width: 100%;
+    /* The entire star should be able to be seen */
+    background-size: contain;
+}
+
+.filledStar {
+    background-color: gold;
+}
+.emptyStar {
+    background-color: lightgray;
 }

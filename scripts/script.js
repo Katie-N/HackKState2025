@@ -5,7 +5,7 @@ console.log("Hello world")
 function createWidgetElement(type, data = {}) {
     console.log(data)
     const element = document.createElement('li');
-    element.className = 'widget-base';
+    element.className = 'widget-base widget-container';
     if (type === 'note') {
         // Note widget
         const textarea = document.createElement('textarea');
@@ -75,6 +75,27 @@ function createWidgetElement(type, data = {}) {
         element.innerHTML = '';
         element.appendChild(container);
     }
+    starContainer = document.createElement('div')
+    starContainer.className = 'starContainer';
+    for (let i = 1; i < 6; i++) {
+        
+        // Make the star clickable
+        const star = document.createElement('button');
+        // star.datasets.starValue = i;
+        star.className = 'star star' + i;
+        // If the star is less than or equal to the current rating, make it filled
+        if (data.rating && data.rating >= i) {
+            star.className += ' filledStar';
+        } else {
+            // Otherwise, make it empty
+            star.className += ' emptyStar';
+        }
+
+        // When the star is clicked, it should toggle the rating of that widget to the star value.
+        star.onclick="rateWidget()";
+        starContainer.appendChild(star);
+    }
+    element.appendChild(starContainer);
     return element;
 }
 
@@ -170,3 +191,7 @@ function transformWidgetToElement(key, widgetData) {
 goToDiary();
 // document.getElementById("goToCalendar").addEventListener("click", goToCalendar);
 // document.getElementById("goToDiary").addEventListener("click", goToDiary);
+
+function rateWidget() {
+    console.log("Toggling star");
+}
