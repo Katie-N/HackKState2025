@@ -106,17 +106,32 @@ function createWidgetElement(type, data = {}) {
     element.appendChild(starContainer);
     return element;
 }
+let oneStar = new Audio('./audio/Processed/oneStar.mp3');
+let twoStar = new Audio('./audio/Processed/twoStar.mp3');
+let threeStar = new Audio('./audio/Processed/threeStar.mp3');
+let fourStar = new Audio('./audio/Processed/fourStar.mp3');
+let fiveStar = new Audio('./audio/Processed/fiveStar.mp3');
+oneStar.preload = 'auto';
+twoStar.preload = 'auto';
+threeStar.preload = 'auto';
+fourStar.preload = 'auto';
+fiveStar.preload = 'auto';
 
 function rateWidget() {
     if (this.classList.contains('star1')) {
+        oneStar.play();
         numStars = 1
     } else if (this.classList.contains('star2')) {
+        twoStar.play();
         numStars = 2
     } else if (this.classList.contains('star3')) {
+        threeStar.play();
         numStars = 3
     } else if (this.classList.contains('star4')) {
+        fourStar.play();
         numStars = 4
     } else if (this.classList.contains('star5')) {
+        fiveStar.play();
         numStars = 5
     }
 
