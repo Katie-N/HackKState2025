@@ -215,7 +215,14 @@ body {
 
 .song-widget .song-preview {
     width: 80%;
-    margin-top: 20px;
+}
+.song-preview {
+    background-image: url("../assets/greenRecordPlayer.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: inherit;
+    margin: auto;
+    background-position: center;
 }
 
 #goToCalendar, #sendToFirestore {
