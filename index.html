@@ -250,6 +250,26 @@
 
             // Finally, create or update the diary entry document with the references to each widget.
             await setDoc(doc(db, "diaryEntries", currentDiaryDate), diaryEntryData);
+
+            // Update the calendar cell with the new average rating
+            const dateCell = document.querySelector(`.calendarCell[data-date="${currentDiaryDate}"]`);
+            if (dateCell) {
+                // Remove existing rating if any
+                const existingRating = dateCell.querySelector('.calendarAvgRating');
+                if (existingRating) {
+                    existingRating.remove();
+                }
+                // Add new rating if there is one
+                if (avgRating > 0) {
+                    let ratingDiv = document.createElement('div');
+                    ratingDiv.className = 'calendarAvgRating';
+                    ratingDiv.innerText = `⭐${avgRating}`;
+                    dateCell.appendChild(ratingDiv);
+                }
+            }
+
+            // Update the banner with the new average rating
+            document.getElementById("dateIdentifierHeading").innerText = `${currentDiaryDate}: ⭐${avgRating}`;
         }
         window.saveDiaryEntryToFirestore = saveDiaryEntryToFirestore;
         document.getElementById("sendToFirestore").addEventListener("click", saveDiaryEntryToFirestore);
