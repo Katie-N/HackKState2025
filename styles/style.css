@@ -200,6 +200,7 @@ body {
 .image-widget button {
     padding: 10px 20px;
     font-family: "Montserrat";
+    font-size: 1rem;
     /* margin-top: 10px; */
     border: none;
     background-color: #ddd;
