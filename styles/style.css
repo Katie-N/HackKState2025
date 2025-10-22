@@ -14,7 +14,7 @@
 }
 /* I want images to default to the width of their parent container. */
 img {
-    width:100%;
+    max-width: 100%;
 }
 ul {
     list-style-type: none;
