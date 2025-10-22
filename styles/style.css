@@ -51,6 +51,16 @@ body {
     font-size: 1rem;
     padding-bottom: 10px;
 }
+
+/* Google Login Button */
+/* Google Login Button */
+#signInButton {
+    width:  10%;
+}
+#signInButton img {
+    width:  100%;
+}
+
 /* Styles for screens wider than 768px */
 @media screen and (min-width: 768px) {
     #banner h1{
@@ -297,5 +307,12 @@ body {
 
 /* Calendar Styling */
 .calendarCell {
-    padding: 5%;
+    padding: 1%;
+}
+/* Styles for screens wider than 768px */
+@media screen and (min-width: 480px) {
+    /* 5% was causing the cells to overflow on mobile view (not on small window view but specifically when the device is emulated.  */
+    .calendarCell {
+        padding: 5%;
+    }
 }
