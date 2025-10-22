@@ -63,6 +63,10 @@
 
 /* Styles for screens wider than 768px */
 @media screen and (min-width: 768px) {
+    #optionsPopup {
+        background-image: url("../assets/gridNotebookCropped2Horizontal.jpg");
+    }
+    
     /* 5% was causing the cells to overflow on mobile view (not on small window view but specifically when the device is emulated.  */
     #optionsButton {
         width: 10%;
