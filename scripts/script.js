@@ -1,10 +1,8 @@
-console.log("Hello world")
-
 // Functions to transform widgets into their editable versions
 // Unified widget creation and transformation
 function createWidgetElement(type, data = {}) {
     const element = document.createElement('li');
-    clickSound = new Audio('./audio/Processed/click.mp3');
+    let clickSound = new Audio('./audio/Processed/click.mp3');
     clickSound.preload = 'auto';
     clickSound.play();
     element.className = 'widget-base widget-container';
@@ -71,7 +69,7 @@ function createWidgetElement(type, data = {}) {
         container.className = 'song-widget widget-base';
         const input = document.createElement('input');
         input.type = 'text';
-        input.placeholder = 'Paste your song link here...';
+        input.placeholder = 'Enter song name here...';
         const preview = document.createElement('a');
         // Populate the song name if it is coming from Firebase
         if (data.songName) {
@@ -85,7 +83,7 @@ function createWidgetElement(type, data = {}) {
         element.innerHTML = '';
         element.appendChild(container);
     }
-    starContainer = document.createElement('div')
+    let starContainer = document.createElement('div')
     starContainer.className = 'starContainer';
     starContainer.dataset.currentRating = data.rating
     for (let i = 1; i < 6; i++) {
@@ -110,6 +108,7 @@ function createWidgetElement(type, data = {}) {
     element.appendChild(starContainer);
     return element;
 }
+
 let oneStar = new Audio('./audio/Processed/oneStar.mp3');
 let twoStar = new Audio('./audio/Processed/twoStar.mp3');
 let threeStar = new Audio('./audio/Processed/threeStar.mp3');
