@@ -1,0 +1,70 @@
+:root {
+    /* --footerDisplay: flex; */
+    --optionsButtonDisplay: block;
+}
+
+#optionsButton {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: var(--optionsButtonDisplay)
+}
+
+.show {
+    display: block;
+}
+.hide {
+    display: none;
+}
+
+#optionsPopup {
+    background-image: url("../assets/gridNotebookCropped2.jpg");
+    background-size: cover;
+    height: 90vh;
+    width: 80%;
+    justify-self: center;
+    align-self: anchor-center;
+    z-index: 6;
+    position: fixed;
+}
+
+#coverOptionsBackground {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index:5;
+}
+
+/* Google Login Button */
+#signInButton {
+    width:  10%;
+}
+#signInButton img {
+    width:  100%;
+}
+
+/* Footer styling */
+#footer {
+    display: var(--footerDisplay);
+    justify-content: flex-end;
+    position: fixed;
+    bottom: 0;
+}
+
+#optionsButton {
+    background-color: transparent;
+    border: none;
+    width: 20%;
+    cursor: pointer;
+}
+
+/* Styles for screens wider than 768px */
+@media screen and (min-width: 768px) {
+    /* 5% was causing the cells to overflow on mobile view (not on small window view but specifically when the device is emulated.  */
+    #optionsButton {
+        width: 10%;
+    }
+}

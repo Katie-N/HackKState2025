@@ -5,11 +5,16 @@
 :root {
     --calendarDisplay: block;
     --diaryEntryDisplay: none;
+    --footerDisplay: block;
     --backgroundBodyImage: url("../assets/BrownPaperBackground.jpg");
 }
 * {
     margin: 0;
     padding: 0;
+}
+/* I want images to default to the width of their parent container. */
+img {
+    width:100%;
 }
 ul {
     list-style-type: none;
@@ -50,15 +55,6 @@ body {
     text-align: center;
     font-size: 1rem;
     padding-bottom: 10px;
-}
-
-/* Google Login Button */
-/* Google Login Button */
-#signInButton {
-    width:  10%;
-}
-#signInButton img {
-    width:  100%;
 }
 
 /* Styles for screens wider than 768px */
