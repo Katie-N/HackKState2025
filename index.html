@@ -5,6 +5,9 @@
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/calendarScreen.css">
+    <link rel="stylesheet" href="./styles/diaryEntry.css">
+    <link rel="stylesheet" href="./styles/optionsMenu.css">
     <!-- Load fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,8 +21,18 @@
             <h2 id="dateIdentifierHeading">October</h2>
         </div>
         <button id="sendToFirestore"><img src="./assets/icons/floppyDisc.jpg"></button>
-        <button id="signInButton">Sign in</button>
     </div>
+    <div id="optionsContainer" class="hide">    
+        <div id="coverOptionsBackground"></div>    
+        <div id="optionsPopup">
+            <button id="signInButton"><img src="./assets/icons/googleIcon.png"></button>
+        </div>
+    </div>
+    <button id="optionsButton">
+        <img src="./assets/icons/cogIcon.png" alt="">
+    </button>
+    <!-- <footer id="footer">
+    </footer> -->
     <div id="calendarScreen">
         <div id="calendar"></div>
     </div>
@@ -46,5 +59,6 @@
     <script type="module" src="./scripts/populateCalendar.js"></script>
     <script src="./scripts/script.js"></script>
     <script type="module" src="./scripts/auth.js"></script>
+    <script src="./scripts/optionsMenu.js"></script>
 </body>
 </HTML>
