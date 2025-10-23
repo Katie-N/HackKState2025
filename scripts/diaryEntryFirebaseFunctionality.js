@@ -1,15 +1,22 @@
 import { doc, setDoc, collection, addDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-storage.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
+const auth = getAuth(window.app);
 // Function to handle image upload
 async function uploadImageToFirebase(file) {
+    if (!auth.currentUser) {
+        console.log("Um, no one is signed in...")
+        return ""
+    }
     try {
+        console.log(auth.currentUser.uid)
         // Create a unique filename using timestamp
         const timestamp = new Date().getTime();
         const filename = `${timestamp}_${file.name}`;
         
         // Create a storage reference
-        const storageRef = ref(window.firebaseStorage, 'images/' + filename);
+        const storageRef = ref(window.firebaseStorage, auth.currentUser.uid + '/images/' + filename);
         
         // Upload the file
         const snapshot = await uploadBytes(storageRef, file);

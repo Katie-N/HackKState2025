@@ -1,4 +1,4 @@
-import { getAuth, onAuthStateChanged, signInWithRedirect, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
 const auth = getAuth(window.app);
 
