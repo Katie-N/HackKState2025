@@ -1,49 +1,18 @@
-import { getAuth, getRedirectResult, signInWithRedirect, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-// const auth = getAuth();
+import { getAuth, onAuthStateChanged, signInWithRedirect, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
-// function signIn() {
-//     const provider = new GoogleAuthProvider();
-//     signInWithRedirect(auth, provider)
-// }
-// document.getElementById("signInButton").addEventListener("click", signIn)
-
-// getRedirectResult(auth).then((result) => {
-//     if (result) {
-//         // This gives you a Google Access Token. You can use it to access the Google API.
-//         const credential = GoogleAuthProvider.credentialFromResult(result);
-//         const token = credential.accessToken;
-//         // The signed-in user info.
-//         window.user = result.user;
-//         console.log(result.user)
-//     }    
-// }).catch((error) => {
-//     console.log(error)
-//     // // Handle Errors here.
-//     // const errorCode = error.code;
-//     // const errorMessage = error.message;
-//     // // The AuthCredential type that was used.
-//     // const credential = GoogleAuthProvider.credentialFromError(error);
-    
-// });
-
-const provider = new GoogleAuthProvider();
 const auth = getAuth(window.app);
 
-document.getElementById("signInButton").addEventListener("click", () => {
-  signInWithRedirect(auth, provider);
+document.getElementById("signInButton").addEventListener("click", async () => {
+  // signInWithRedirect doesn't work unless you setup a reverse proxy :(
+  // signInWithRedirect(auth, new GoogleAuthProvider());
+  const userCred = await signInWithPopup(auth, new GoogleAuthProvider());
+  console.log(userCred.user.uid)
+  window.userId = userCred.user.uid
 });
 
-// After redirect back to your site:
-getRedirectResult(auth)
-  .then((result) => {
-    if (result) {
-      console.log("Signing in");
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      const user = result.user;
-      console.log("User:", user);
-    }
-  })
-  .catch((error) => {
-    console.log("ERROR", error);
-  });
+// This only works when using signInWithPopup (not signInWithRedirect)
+// I was hoping I could get signInWithRedirect to work by using onAuthStateChanged instead of getRedirectResult but it doesn't :(
+// The reason signInWithRedirect doesn't work is explained here https://firebase.google.com/docs/auth/web/redirect-best-practices
+// onAuthStateChanged(auth, (user) => {
+//     console.log("OnAuthStateChanged", user)
+// });
