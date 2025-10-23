@@ -15,6 +15,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+window.app = app
 
 const db = getFirestore(app);
 window.db = db; // Make db accessible globally for the populateCalendar.js script
