@@ -5,7 +5,10 @@ import { getStorage } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-s
 
 const firebaseConfig = {
     apiKey: "AIzaSyDy_MUOgD-8EpwDC3dwz4X0AxiOzc99O9I",
-    authDomain: "hack-kstate-2025-database.firebaseapp.com",
+    // If you change the website to a different domain, 
+    // then signInWithRedirect will need to be updated. 
+    // Right now, I'm hosting the sign in code under the /__/ directory. 
+    authDomain: "katie-n.github.io",
     projectId: "hack-kstate-2025-database",
     storageBucket: "hack-kstate-2025-database.firebasestorage.app",
     messagingSenderId: "309828879233",

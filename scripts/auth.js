@@ -1,12 +1,20 @@
-import { getAuth, signInWithPopup, onAuthStateChanged, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+import { getAuth, signInWithPopup, signInWithRedirect, onAuthStateChanged, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 import { populateCalendar, unpopulateCalendar } from "./populateCalendar.js";
 
 window.auth = getAuth(window.app);
+let production = true;
 
 document.getElementById("signInButton").addEventListener("click", async () => {
+    const userCred = null
     // signInWithRedirect doesn't work unless you setup a reverse proxy :(
-    // signInWithRedirect(auth, new GoogleAuthProvider());
-    const userCred = await signInWithPopup(window.auth, new GoogleAuthProvider());
+    if (production == true) {
+        console.log("trying to sign in")
+        userCred = await signInWithRedirect(window.auth, new GoogleAuthProvider());
+
+    } else {
+        userCred = await signInWithPopup(window.auth, new GoogleAuthProvider());
+    }
+    console.log(userCred)
     window.userId = userCred.user.uid
     if (document.getElementById("optionsContainer").classList.contains("show")) {
         toggleShow()
