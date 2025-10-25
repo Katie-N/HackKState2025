@@ -3,13 +3,18 @@ import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/fireba
 
 // Function to handle image upload
 async function uploadImageToFirebase(file) {
+    if (!window.auth.currentUser) {
+        console.log("Um, no one is signed in...")
+        return ""
+    }
     try {
+        console.log(window.auth.currentUser.uid)
         // Create a unique filename using timestamp
         const timestamp = new Date().getTime();
         const filename = `${timestamp}_${file.name}`;
         
         // Create a storage reference
-        const storageRef = ref(window.firebaseStorage, 'images/' + filename);
+        const storageRef = ref(window.firebaseStorage, window.auth.currentUser.uid + '/images/' + filename);
         
         // Upload the file
         const snapshot = await uploadBytes(storageRef, file);
@@ -34,7 +39,7 @@ async function pullDiaryEntryFromFirestore(date){
     console.log("Pulling diary entry from firestore");
     // Pull diary entry from firestore for specific day
     // Do this once when the diary entry is clicked on. 
-    let docRef = doc(db, "diaryEntries", date);
+    let docRef = doc(db, "users/" + window.auth.currentUser.uid + "/diaryEntries", date);
     let docSnap = await getDoc(docRef);
 
     // If the diary entry for this day already exists, populate
@@ -55,7 +60,7 @@ async function pullDiaryEntryFromFirestore(date){
 
             // Handle widget references
             let collection = references[key].parent.id
-            docRef = doc(db, collection, references[key].id);
+            docRef = doc(db, "users/" + window.auth.currentUser.uid + "/" + collection, references[key].id);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
                 references[key] = docSnap.data()
@@ -162,7 +167,7 @@ async function saveDiaryEntryToFirestore() {
             continue;
         }
         // Create a new document in the appropriate collection
-        const docRef = await addDoc(collection(db, collectionName), widgetObject);
+        const docRef = await addDoc(collection(db, "users/" + window.auth.currentUser.uid + "/" + collectionName), widgetObject);
         console.log("Document written with ID: ", docRef.id);
 
         // Store the reference for later use in the diary entry
@@ -176,7 +181,7 @@ async function saveDiaryEntryToFirestore() {
     diaryEntryData.avgRating = avgRating;
 
     // Finally, create or update the diary entry document with the references to each widget.
-    await setDoc(doc(db, "diaryEntries", currentDiaryDate), diaryEntryData);
+    await setDoc(doc(db, "users/" + window.auth.currentUser.uid + "/diaryEntries", currentDiaryDate), diaryEntryData);
 
     // Update the calendar cell with the new average rating
     const dateCell = document.querySelector(`.calendarCell[data-date="${currentDiaryDate}"]`);

@@ -5,11 +5,16 @@
 :root {
     --calendarDisplay: block;
     --diaryEntryDisplay: none;
+    --footerDisplay: block;
     --backgroundBodyImage: url("../assets/BrownPaperBackground.jpg");
 }
 * {
     margin: 0;
     padding: 0;
+}
+/* I want images to default to the width of their parent container. */
+img {
+    max-width: 100%;
 }
 ul {
     list-style-type: none;
@@ -51,6 +56,7 @@ body {
     font-size: 1rem;
     padding-bottom: 10px;
 }
+
 /* Styles for screens wider than 768px */
 @media screen and (min-width: 768px) {
     #banner h1{
@@ -61,241 +67,7 @@ body {
     }
 }
 
-/* Calendar Screen Styles */
-#calendarScreen {
-    /* background-image: linear-gradient(rgba(221, 155, 133, 0.55), rgba(221, 155, 133, 0.55)), url("../assets/WhiteWallTexture.jpg"); */
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-    display: var(--calendarDisplay);
-}
-
-#calendar {
-    /* Get calendar as background picture of div */
-    background-image: url("../assets/clearCalendar.png");
-    left: 0;
-    right: 0;
-    top:0;
-    bottom:0;
-    margin: auto;
-    margin-top: 5vmin; /* move the calendar down so it has the same amount of margin on top as it does on its sides */
-    width: 90vmin;
-    height: 90vmin;
-    /* position: absolute; */
-    background-size: cover;
-
-    /* Make grid that is just over each square in the calendar */
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    padding-top: 22vmin;
-    padding-bottom: 5vmin;
-}
-
 .backgroundOfBody {
     background-image: var(--backgroundBodyImage);
     background-size: cover;
-}
-
-/* Diary Entry Screen Styles */
-#diaryEntryScreen {
-    width: 100%;
-    padding-bottom: calc(14vmin + 4vh); /* To prevent content from being hidden behind the fixed widget selection bar */
-    display: var(--diaryEntryDisplay);
-}
-
-#diaryEntryWidgets {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    /* Add padding at the bottom to prevent overlap with fixed widget selection bar */
-    padding-bottom: calc(14vmin + 4vh); /* 10vmin for icons + 2vmin padding on each side + extra space */
-    min-height: 100vh; /* Ensure the container takes full viewport height */
-}
-
-#widgetSelection {
-    display: flex;
-    flex-flow: row;
-    justify-content: space-around;
-    padding: 2vmin;
-    background-color: white;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow for visual separation */
-    z-index: 1000; /* Ensure it stays on top */
-}
-
-#widgetSelection img {
-    width: 10vmin;
-    height: 10vmin;
-}
-
-#widgetSelection li {
-    list-style-type: none;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    font-family: "Montserrat";
-}
-
-.emptyWidget {
-    border: 2px dashed black;
-    background-color: rgba(255, 255, 255, 0.5);
-    /* width: 90vmin;
-    height: 90vmin; */
-    /* margin: auto; */
-}
-
-/* Base widget styles */
-.widget-base {
-    margin: auto;
-    font-family: "Montserrat";
-}
-
-/* Note widget styles */
-.note-widget {
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-    border: none;
-    resize: none;
-    background-color: rgba(255, 255, 255, 0.8);
-    font-family: "Montserrat";
-    font-size: 2rem;
-}
-
-.post-it {
-    background-image: url("../assets/postItNote.jpg");
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: 16% 16% 7% 16%;
-}
-
-.notebookPaper {
-    background-image: url("../assets/crinklyLinedPaper.jpg");
-    background-size: cover;
-    background-position: left;
-    padding: 9vmin;
-}
-
-/* Image widget styles */
-.image-widget {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.image-widget img {
-    max-width: 100%;
-    max-height: 80%;
-}
-
-.image-widget input[type="file"] {
-    display: none;
-}
-
-.image-widget button {
-    padding: 10px 20px;
-    font-family: "Montserrat";
-    font-size: 1rem;
-    /* margin-top: 10px; */
-    border: none;
-    background-color: #ddd;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.image-widget button:hover {
-    background-color: #ccc;
-}
-
-/* Song widget styles */
-.song-widget {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.song-widget input {
-    width: 80%;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-family: "Montserrat";
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.song-widget .song-preview {
-    width: 80%;
-}
-.song-preview {
-    background-image: url("../assets/greenRecordPlayer.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: inherit;
-    margin: auto;
-    background-position: center;
-}
-
-#goToCalendar, #sendToFirestore {
-    background-color: transparent;
-    border: none;
-    width: 10vmin;
-}
-#goToCalendar img, #sendToFirestore img {
-    width: 100%;
-    height: auto;
-}
-
-.widget-container {
-    display: flex;
-    flex-flow: column;
-    justify-content: space-between;
-    margin-bottom: 5vmin;
-    width: 80vmin;
-    height: 80vmin;
-    background-color: rgba(255, 255, 255, 0.8);
-}
-
-.image-widget, .note-widget, .song-widget {
-    height: 80%;
-    width: 100%;
-}
-
-/* Star Styling */
-.starContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    width: 100%;
-    height:20%;
-}
-.star {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    background-image: url("../assets/icons/emptyStar.png");
-    /* The star should be as big as its container */
-    width: 100%;
-    /* The entire star should be able to be seen */
-    background-size: contain;
-}
-
-.filledStar {
-    
-    background-color: transparent;
-    background-image: url("../assets/icons/filledStar.png");
-}
-.emptyStar {
-    background-color: transparent;
-}
-
-/* Calendar Styling */
-.calendarCell {
-    padding: 5%;
 }

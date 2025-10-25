@@ -211,6 +211,9 @@ function goToCalendar() {
     document.body.style.setProperty('--diaryEntryDisplay', 'none')
     // change display of #calendar to block
     document.body.style.setProperty('--calendarDisplay', 'block')
+    // change display of #footer to block
+    // document.body.style.setProperty('--footerDisplay', 'flex')
+    document.body.style.setProperty('--optionsButtonDisplay', 'block')
     
     // When we go to the calendar, we don't need to see the link to go to the calendar or the button to send the diary entry to Firestore
     document.getElementById("goToCalendar").style.display = "none";
@@ -234,6 +237,9 @@ function goToDiary(){
     document.body.style.setProperty('--diaryEntryDisplay', 'block')
     // change display of #calendar to none
     document.body.style.setProperty('--calendarDisplay', 'none')
+    // change display of #footer to none
+    // document.body.style.setProperty('--footerDisplay', 'none')
+    document.body.style.setProperty('--optionsButtonDisplay', 'none')
 
     // When we go to the calendar, we don't need to see the link to go to the calendar or the button to send the diary entry to Firestore
     document.getElementById("goToCalendar").style.display = "block";
