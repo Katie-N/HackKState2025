@@ -5,7 +5,7 @@ import { getStorage } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-s
 
 const firebaseConfig = {
     apiKey: "AIzaSyDy_MUOgD-8EpwDC3dwz4X0AxiOzc99O9I",
-    authDomain: "hack-kstate-2025-database.firebaseapp.com",
+    authDomain: "howmanystars.netlify.app",
     projectId: "hack-kstate-2025-database",
     storageBucket: "hack-kstate-2025-database.firebasestorage.app",
     messagingSenderId: "309828879233",
