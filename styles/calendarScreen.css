@@ -19,15 +19,38 @@
     margin-top: 5vmin; /* move the calendar down so it has the same amount of margin on top as it does on its sides */
     width: 90vmin;
     height: 90vmin;
-    /* position: absolute; */
     background-size: cover;
 
+    /* Display is needed so I can better style the month container and day container */
+    display: flex;
+    flex-flow: column;;
+}
+
+#calendarMonthsContainer {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+
+    padding-left: 2%;
+    padding-right: 3%;
+    padding-top: 2%;
+    height: 10%
+}
+
+.monthButton {
+    width: calc(100% / 12);
+    height: 100%;
+}
+
+
+#calendarDaysContainer {
     /* Make grid that is just over each square in the calendar */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    padding-top: 22vmin;
+    padding-top: 15vmin;
     padding-bottom: 5vmin;
+    height: 100%;
 }
 
 .calendarCell {

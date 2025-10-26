@@ -2,8 +2,8 @@ import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-
 
 export function unpopulateCalendar() {
     console.log("Unpopulating Calendar")
-    let calendar = document.getElementById("calendar")
-    calendar.innerHTML = ""
+    let calendarDays = document.getElementById("calendarDaysContainer")
+    calendarDays.innerHTML = ""
 }
 
 // This function takes a datetime object of a day and returns the zero indexed offset of its day of the week
@@ -38,7 +38,7 @@ export function populateCalendar() {
     console.log("Populating Calendar")
 
     // We will just get dates for October 2025
-    let calendar = document.getElementById("calendar")
+    let calendarDays = document.getElementById("calendarDaysContainer")
 
     // For example, because October 1 2025 is a Wednesday, offset is 3
     // month - 1 because dates are zero indexed
@@ -49,7 +49,7 @@ export function populateCalendar() {
     for (let i = 0; i < offset; i++) {
         let emptyCell = document.createElement("div")
         emptyCell.className = "calendarCell emptyCell"
-        calendar.appendChild(emptyCell)
+        calendarDays.appendChild(emptyCell)
     }
 
     // Populate the days of the month
@@ -79,6 +79,6 @@ export function populateCalendar() {
                 }
             })();
         }
-        calendar.appendChild(calendarCell)
+        calendarDays.appendChild(calendarCell)
     }
 }
