@@ -43,9 +43,7 @@
 .emptyWidget {
     border: 2px dashed black;
     background-color: rgba(255, 255, 255, 0.5);
-    /* width: 90vmin;
-    height: 90vmin; */
-    /* margin: auto; */
+    padding: 5%;
 }
 
 /* Base widget styles */
@@ -127,6 +125,7 @@
     padding: 10px;
     margin-bottom: 10px;
     font-family: "Montserrat";
+    font-size: medium;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
