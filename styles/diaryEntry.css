@@ -152,14 +152,38 @@
     height: auto;
 }
 
+#widgetsForDay{
+    display: grid;
+    /* On phones, there should only be one column. */
+    grid-template-columns: 1fr;
+}
 .widget-container {
     display: flex;
     flex-flow: column;
     justify-content: space-between;
     margin-bottom: 5vmin;
-    width: 80vmin;
-    height: 80vmin;
+    width: 80%;
+    aspect-ratio: 1;
     background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Styles for screens wider than 425px */
+@media screen and (min-width: 425px) {
+    #widgetsForDay{
+        /* 2 columns on medium screens */
+        grid-template-columns: 1fr 1fr;
+    }
+    .widget-container {
+        /* Less of a gap between widgets */
+        width: 90%;
+    }
+}
+/* Styles for screens wider than 768px */
+@media screen and (min-width: 768px) {
+    #widgetsForDay{
+        /* 3 columns on the biggest screens */
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }
 
 .image-widget, .note-widget, .song-widget {
@@ -187,7 +211,6 @@
 }
 
 .filledStar {
-    
     background-color: transparent;
     background-image: url("../assets/icons/filledStar.png");
 }
