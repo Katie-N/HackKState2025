@@ -175,31 +175,52 @@ Sortable.create(widgetsForDays, {
         return
     },
     onAdd: (event) => {
-        // If the new element was added below the empty widget, move it above instead
-        const emptyWidget = widgetsForDays.querySelector(".emptyWidget");
-        widgetsForDays.appendChild(emptyWidget);
-
         // Replace the icon with the correct widget element
         const newElement = event.item;
-        const imgElement = newElement.querySelector('img');
-        let type = null;
-        if (imgElement) {
-            const imgSrc = imgElement.src;
-            if (imgSrc.includes('notepadIcon.png')) {
-                type = 'note';
-            } else if (imgSrc.includes('cameraIcon.png')) {
-                type = 'picture';
-            } else if (imgSrc.includes('music-playerIcon.png')) {
-                type = 'song';
-            }
-        }
-        if (type) {
-            // Create the widget element and replace the icon
-            const widget = createWidgetElement(type, {});
-            widgetsForDays.replaceChild(widget, newElement);
-        }
+        convertSelectionToWidget(newElement)
     }
  });
+
+//  This function is used to convert the option button to an editable widget of the corresponding type.
+ function convertSelectionToWidget(newElement) {
+    // If the new element was added below the empty widget, move it above instead
+    const emptyWidget = widgetsForDays.querySelector(".emptyWidget");
+    widgetsForDays.appendChild(emptyWidget);
+
+    // img here is just used to filter for the icon that was dragged
+    const imgElement = newElement.querySelector('img');
+    let type = null;
+    if (imgElement) {
+        const imgSrc = imgElement.src;
+        if (imgSrc.includes('notepadIcon.png')) {
+            type = 'note';
+        } else if (imgSrc.includes('cameraIcon.png')) {
+            type = 'picture';
+        } else if (imgSrc.includes('music-playerIcon.png')) {
+            type = 'song';
+        }
+    }
+    if (type) {
+        // Create the widget element and replace the icon
+        const widget = createWidgetElement(type, {});
+        widgetsForDays.replaceChild(widget, newElement);
+    }
+ }
+
+// In order to enable just clicking to add the element to the list,
+// I will add an event listener to each child and when it is clicked on, 
+// it will copy the element and append it to the list. 
+widgetSelection.addEventListener('click', function (event) {
+    // Grab the closest option to where the click happened
+    const child = event.target.closest('li'); 
+
+    // Return early if there was an issue
+    if (!child || !widgetSelection.contains(child)) return;
+
+    const newEl = child.cloneNode(true);
+    widgetsForDays.appendChild(newEl);
+    convertSelectionToWidget(newEl);
+});
 
 function goToCalendar() {
     console.log("Going to calendar");
@@ -224,7 +245,7 @@ currentDiaryDate = null
 function goToDiary(){
     // Delete all existing widgets except the empty one
     let widgetsForDay = document.getElementById("widgetsForDay");
-    widgetsForDay.innerHTML = '<li class="emptyWidget widget-base widget-container"></li>';
+    widgetsForDay.innerHTML = '<li class="emptyWidget widget-base widget-container">Drag widget here</li>';
     document.getElementById("dateIdentifierHeading").innerText = this.dataset.date;
     
     // Update the global variable so the save function knows what date we are on
