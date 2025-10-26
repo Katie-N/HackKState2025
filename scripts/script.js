@@ -224,7 +224,8 @@ widgetSelection.addEventListener('click', function (event) {
 
 function goToCalendar() {
     console.log("Going to calendar");
-    document.getElementById("dateIdentifierHeading").innerText = "October";
+    
+    document.getElementById("dateIdentifierHeading").innerText = window.dateIdentifier;
 
     // change background to white wall
     document.body.style.setProperty('--backgroundBodyImage', "linear-gradient(rgba(221, 155, 133, 0.55), rgba(221, 155, 133, 0.55)), url('../assets/WhiteWallTexture.jpg')");

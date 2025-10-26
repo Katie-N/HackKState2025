@@ -1,7 +1,7 @@
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
+// This function deletes all days on the calendar
 export function unpopulateCalendar() {
-    console.log("Unpopulating Calendar")
     let calendarDays = document.getElementById("calendarDaysContainer")
     calendarDays.innerHTML = ""
 }
@@ -14,8 +14,7 @@ function getDayOffset(dayObj) {
     return weekdays.indexOf(weekday)
 }
 
-
-// Thisfunction takes a numeric (not string) month (1 for January, 12 for December) and a 4 digit year. 
+// This function takes a numeric (not string) month (1 for January, 12 for December) and a 4 digit year. 
 // It returns the number of days in that month. 
 // It accounts for leap years.
 function numDaysInMonth(month, year) {
@@ -29,13 +28,17 @@ function numDaysInMonth(month, year) {
     return 28
 }
 
-let month = 10 // 10 = october
-let year = 2025
+let months = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"]
+
 // This function is to fill the calendar with links to each diary entry. 
 // Each day gets its own div that is positioned according to its real world position on a calendar. 
-export function populateCalendar() {
+// It takes the numeric month (1 being January) and the digit year
+// By default, it will use the current month and year unless parameters are passed.
+export function populateCalendar(month = new Date().getMonth() + 1, year = 2025) {
     unpopulateCalendar()
-    console.log("Populating Calendar")
+    
+    window.dateIdentifier = months[month-1] + " " + year;
+    document.getElementById("dateIdentifierHeading").innerText = window.dateIdentifier;
 
     // We will just get dates for October 2025
     let calendarDays = document.getElementById("calendarDaysContainer")
@@ -81,4 +84,17 @@ export function populateCalendar() {
         }
         calendarDays.appendChild(calendarCell)
     }
+}
+
+// This function takes a month in numeric form (1 = January) and a 4 digit year
+function changeMonth(month, year) {
+    populateCalendar(month, year)
+}
+
+// Add event listeners to each month button on the calendar so that clicking it switches the month
+let monthButtons = document.getElementById("calendarMonthsContainer").children
+for (let i = 0; i < monthButtons.length; i++) {
+    monthButtons[i].addEventListener("click", function() {
+        changeMonth(this.dataset.month, 2025)
+    })
 }
