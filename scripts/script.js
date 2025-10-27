@@ -280,7 +280,7 @@ function transformWidgetToElement(key, widgetData) {
 goToCalendar();
 // goToDiary();
 
-document.getElementById("titleScreen").addEventListener("click", function () {
-    console.log("CLICK")
-    this.remove();
-})
+titleScreen = document.getElementById("titleScreen")
+titleScreen.addEventListener('click', () => titleScreen.style.opacity = '0');
+// If you want to remove it from the page after the fadeout
+titleScreen.addEventListener('transitionend', () => titleScreen.remove());
