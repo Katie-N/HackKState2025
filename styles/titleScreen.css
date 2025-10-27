@@ -1,9 +1,10 @@
 #titleScreen {
-    background-color: white;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.55)), url("../assets/horizontal\ crinkle\ paper.jpg");
     width: 100vw ;
     height: 100vh;
     position: fixed;
     top: 0;
+    transition: opacity 0.5s;
 }
 
 #logo{
@@ -14,4 +15,5 @@
     left: 0;
     right: 0;
     margin: auto;
+    /* backdrop-filter: blur(10px); */
 }
