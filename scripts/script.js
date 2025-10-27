@@ -279,3 +279,8 @@ function transformWidgetToElement(key, widgetData) {
 // Always go to calendar on load
 goToCalendar();
 // goToDiary();
+
+document.getElementById("titleScreen").addEventListener("click", function () {
+    console.log("CLICK")
+    this.remove();
+})
